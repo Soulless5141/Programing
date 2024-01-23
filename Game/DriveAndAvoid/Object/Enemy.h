@@ -8,8 +8,8 @@ private:
 	int type;           //タイプ
 	int image;          //画像
 	float speed;        //速さ
-	Vetor2D location;   //位置情報
-	Vetor2D box_size;   //当たり判定の大きさ
+	Vector2D location;   //位置情報
+	Vector2D box_size;   //当たり判定の大きさ
 
 public:
 	Enemy(int type, int handle);
