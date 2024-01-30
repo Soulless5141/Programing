@@ -14,7 +14,7 @@ private:
 	float speed;          //速さ
 	float hp;             //体力
 	float fuel;              //燃料
-	int barrier_const;    //バリアの枚数
+	int barrier_count;    //バリアの枚数
 	Barrier* barrier;     //バリア
 
 public:
@@ -27,8 +27,8 @@ public:
 	void Finalize();    //終了時処理
 
 public:
-	void SetActivive(bool flg);    //有効フラグ設定
-	void DecreaseHP(float value);  //体力減少処理
+	void SetActive(bool flg);    //有効フラグ設定
+	void DecreaseHp(float value);  //体力減少処理
 	Vector2D GetLocation() const;  //位置座標取得処理
 	Vector2D GetBoxSize() const;   //当たり判定の大きさ取得
 	float GetSpeed() const;          //速さ取得処理
@@ -39,6 +39,6 @@ public:
 	
 private:
 	void Movement();      //移動処理
-	void Accelration();   //加速処理
+	void Acceleration();   //加速処理
 };
 
