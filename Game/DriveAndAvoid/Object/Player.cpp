@@ -21,7 +21,7 @@ void Player::Initialize()
 	box_size = Vector2D(31.0f, 60.0f);
 	angle = 0.0f;
 	speed = 3.0f;
-	hp = 1000;
+	hp = 10;
 	fuel = 20000;
 	barrier_count = 3;
 
@@ -59,6 +59,12 @@ void Player::Update()
 	//加減速処理
 	Acceleration();
 
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
+	{
+		is_active = false;
+	}
+
+	//バリア処理
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
@@ -175,7 +181,7 @@ void Player::Movement()
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		move += Vector2D(1.0f, 0.0f);
-		angle = -DX_PI_F / 18;
+		angle = DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP))
 	{
@@ -200,10 +206,13 @@ void Player::Movement()
 void Player::Acceleration()
 {
 	//LBボタンが押されたら、減速する
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
 	{
-		if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
-		{
-			speed += 1.0f;
-		}
+		speed -= 1.0f;
+	}
+	//RBボタンが押されたら、加速する
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
+	{
+		speed += 1.0f;
 	}
 }

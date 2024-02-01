@@ -15,6 +15,11 @@ RankingData::RankingData()
 	}
 }
 
+RankingData::~RankingData()
+{
+
+}
+
 //‰Šú‰»ˆ—
 void RankingData::Initialize()
 {
