@@ -81,7 +81,7 @@ void RankingInputScene::Draw() const
 	const int font_size = 25;
 	for (int i = 0; i < 26; i++)
 	{
-		int x = (i * 13) * font_size + 15;
+		int x = (i % 13) * font_size + 15;
 		int y = (i / 13) * font_size + 300;
 		DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'a' + i);
 		y = ((i / 13) + 2) * font_size + 300;
@@ -105,7 +105,7 @@ void RankingInputScene::Draw() const
 		}
 		else
 		{
-			DrawBox(0, 0, font_size, font_size, GetColor(255, 255, 255), FALSE);
+			DrawBox(85, 400, 85 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
 		}
 	}
 }
@@ -142,6 +142,17 @@ bool RankingInputScene::InputName()
 		else
 		{
 			cursor_x = 12;
+		}
+	}
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
+	{
+		if (cursor_x < 12)
+		{
+			cursor_x++;
+		}
+		else
+		{
+			cursor_x = 0;
 		}
 	}
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP))
@@ -193,7 +204,11 @@ bool RankingInputScene::InputName()
 			}
 			else
 			{
-				name[name_num--] = NULL;
+				if (name_num > 0)
+				{
+					name_num--;
+					name[name_num] = NULL;
+				}
 			}
 		}
 	}

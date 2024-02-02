@@ -78,7 +78,7 @@ int RankingData::GetRank(int value) const
 }
 
 //–¼‘Oæ“¾ˆ—
-const char* RankingData::GetName(int value)const
+const char* RankingData::GetName(int value) const
 {
 	return name[value];
 }
@@ -105,7 +105,7 @@ void RankingData::SortData()
 		}
 	}
 
-	//~‡‚ğ®—ñ‚³‚¹‚é
+	//‡ˆÊ‚ğ®—ñ‚³‚¹‚é
 	for (int i = 0; i < 5; i++)
 	{
 		rank[i] = 1;
