@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Appmain.cpp" />
+    <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Scene\GameMainScene.cpp" />
     <ClCompile Include="Scene\HelpScene.cpp" />
     <ClCompile Include="Object\Enemy.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Utility\InputControl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Scene\GameMainScene.h" />
     <ClInclude Include="Scene\HelpScene.h" />
     <ClInclude Include="Object\Enemy.h" />

@@ -3,6 +3,9 @@
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
+#include"../Object/Item.h"
+
+#include <vector>
 
 class GameMainScene : public SceneBase
 {
@@ -15,6 +18,7 @@ private:
 	int enemy_count[3];    //通り過ぎた敵カウント
 	Player* player;        //プレイヤー
 	Enemy** enemy;         //敵
+	std::vector<Item> item;//アイテム
 
 public:
 	GameMainScene();
@@ -32,4 +36,6 @@ private:
 	void ReadHighScore();
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);
+	//アイテムの当たり判定
+	bool IsHitCheck(Player* p, Item it);
 };
