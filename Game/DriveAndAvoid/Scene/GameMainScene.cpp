@@ -90,7 +90,7 @@ eSceneType GameMainScene::Update()
 		{
 			enemy[i]->Update(player->GetSpeed());
 
-			//画面買いに行ったら、敵を削除してスコア加算
+			//画面外に行ったら、敵を削除してスコア加算
 			if (enemy[i]->GetLocation().y >= 640.0f)
 			{
 				enemy_count[enemy[i]->GetType()]++;
@@ -103,7 +103,7 @@ eSceneType GameMainScene::Update()
 			if (IsHitCheck(player, enemy[i]))
 			{
 				player->SetActive(false);
-				player->DecreaseHp(-50.0f);
+				player->DecreaseHp(-100.0f);
 				enemy[i]->Finalize();
 				delete enemy[i];
 				enemy[i] = nullptr;
@@ -112,7 +112,7 @@ eSceneType GameMainScene::Update()
 	}
 
 	//プレイヤーの燃料か体力が0未満なら、リザルトに遷移する
-	if (player->GetFuel() < 0.0f || player->GetHp() < 0.0f)
+	if (player->GetFuel() < 0.0f || player->GetHp() <= 0.0f)
 	{
 		return eSceneType::E_RESULT;
 	}
@@ -173,6 +173,13 @@ void GameMainScene::Draw() const
 	fy = 430.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
+	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
+
+	//SPゲージの描画
+	fx = 510.0f;
+	fy = 350.0f;
+	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "SP GAGE");
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 }
 
