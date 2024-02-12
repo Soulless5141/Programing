@@ -157,7 +157,7 @@ void GameMainScene::Draw() const
 
 	//ƒoƒŠƒA‚Ì–‡”•`‰æ
 	for (int i = 0; i < player->GetBarriarCount(); i++) {
-		DrawRotaGraph(520 + i * 25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
+		DrawRotaGraph(520 + i * 25, 300, 0.2f, 0, barrier_image, TRUE, FALSE);
 	}
 
 	//”R—¿ƒQ[ƒW‚Ì•`‰æ
