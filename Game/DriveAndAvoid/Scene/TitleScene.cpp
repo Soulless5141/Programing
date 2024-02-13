@@ -17,7 +17,7 @@ TitleScene::~TitleScene()
 void TitleScene::Initialize()
 {
 	//画像の読み込み
-	background_image = LoadGraph("Resource/images/Title.bmp");
+	background_image = LoadGraph("Resource/images/Title.png");
 	menu_image = LoadGraph("Resource/images/menu.bmp");
 	cursor_image = LoadGraph("Resource/images/cone.bmp");
 
@@ -89,10 +89,12 @@ void TitleScene::Draw() const
 	DrawGraph(0, 0, background_image, FALSE);
 
 	//メニュー画像の描画
-	DrawGraph(120, 200, menu_image, TRUE);
+	DrawGraph(90, 230, menu_image, TRUE);
 
 	//カーソル画像の描画
-	DrawRotaGraph(90, 220 + menu_cursor * 40, 0.7, DX_PI / 2.0, cursor_image, TRUE);
+	DrawRotaGraph(60, 250 + menu_cursor * 40, 0.7, DX_PI / 2.0, cursor_image, TRUE);
+
+	DrawString(50, 100, "ニコちゃんは旅に出る。", 0xFF0000);
 }
 
 //終了時処理
