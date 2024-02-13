@@ -2,6 +2,9 @@
 #include"../Utility/InputControl.h"
 #include"DxLib.h"
 
+// îRóøÇÃç≈ëÂíl
+#define MAX_FUEL 20000
+
 Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f),
 angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0), barrier(nullptr), sp(0.0f),spnow(0.0f)
 {
@@ -24,7 +27,7 @@ void Player::Initialize()
 	hp = 1000;
 	sp = 0;
 	spnow = 0;
-	fuel = 20000;
+	fuel = MAX_FUEL;
 	barrier_count = 3;
 
 	//âÊëúÇÃì«Ç›çûÇ›
@@ -241,5 +244,12 @@ void Player::Acceleration()
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
 	{
 		speed += 1.0f;
+	}
+}
+
+void Player::AddFuel(float add) {
+	fuel += add;
+	if (fuel >= MAX_FUEL) {
+		fuel = MAX_FUEL;
 	}
 }

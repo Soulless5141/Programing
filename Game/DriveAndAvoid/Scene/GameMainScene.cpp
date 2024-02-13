@@ -146,6 +146,8 @@ eSceneType GameMainScene::Update()
 		}
 		// “–‚½‚è”»’è‚ÌŠm”F
 		if (IsHitCheck(player, item[i])) {
+			// ”R—¿‚ð500‰ñ•œ
+			player->AddFuel(500.f);
 			item[i].Finalize();
 			item.erase(item.begin() + i);
 			i--;
