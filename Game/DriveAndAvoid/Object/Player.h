@@ -31,8 +31,8 @@ public:
 public:
 	void SetActive(bool flg);    //有効フラグ設定
 	void DecreaseHp(float value);  //体力減少処理
-	void DecreaseSp(float value);  //SP減少処理
-	void DecreaseSpNow(float value);  //SP減少処理
+	void DecreaseSp(float value);  //SP増減処理
+	void DecreaseSpNow(float value);  //SP中かどうかの確認(0:増加中  1:待機中   2:減少中)
 	Vector2D GetLocation() const;  //位置座標取得処理
 	Vector2D GetBoxSize() const;   //当たり判定の大きさ取得
 	float GetSpeed() const;          //速さ取得処理

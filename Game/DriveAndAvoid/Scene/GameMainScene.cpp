@@ -115,18 +115,26 @@ eSceneType GameMainScene::Update()
 				enemy[i] = nullptr;
 				if (player->GetSpNow() == 0)     //上限1000のSP加算処理
 				{
-					player->DecreaseSp(200.0f);
+					player->DecreaseSp((i + 1) * 100.0f);
 				}
 			}
 
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
-				player->SetActive(false);
-				player->DecreaseHp(-100.0f);
-				enemy[i]->Finalize();
-				delete enemy[i];
-				enemy[i] = nullptr;
+				// 爆笑ゲージ使用中かどうか？
+				if (player->GetSpNow() == 2) {
+					enemy[i]->Finalize();
+					delete enemy[i];
+					enemy[i] = nullptr;
+				}
+				else {  // 爆笑ゲージ使用していなければ
+					player->SetActive(false);
+					player->DecreaseHp(-100.0f);
+					enemy[i]->Finalize();
+					delete enemy[i];
+					enemy[i] = nullptr;
+				}
 			}
 		}
 	}
