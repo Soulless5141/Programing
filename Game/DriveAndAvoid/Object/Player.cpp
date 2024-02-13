@@ -86,6 +86,15 @@ void Player::Update()
 			barrier = nullptr;
 		}
 	}
+
+	//SPゲージがたまっているとき、Yを押すと発動
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_Y) && GetSpNow() == 1)
+	{
+		if (GetSpNow() == 1)
+		{
+			DecreaseSpNow(1);
+		}
+	}
 }
 
 //描画処理
@@ -132,7 +141,7 @@ void Player::DecreaseSp(float value)
 	this->sp += value;
 }
 
-//SP中かどうかの確認(0:増加中  1:減少中)
+//SP中かどうかの確認(0:増加中  1:待機中   2:減少中)
 void Player::DecreaseSpNow(float value)
 {
 	this->spnow += value;

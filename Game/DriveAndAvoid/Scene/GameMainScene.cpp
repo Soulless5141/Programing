@@ -84,7 +84,7 @@ eSceneType GameMainScene::Update()
 	}
 
 	//SPãŒÀÝ’è
-	if (player->GetSp() >= 1000)
+	if (player->GetSp() >= 1000 && player->GetSpNow() == 0)
 	{
 		player->DecreaseSpNow(1);
 	}
@@ -124,12 +124,12 @@ eSceneType GameMainScene::Update()
 	}
 
 	//SPƒQ[ƒW‚ª‚½‚Ü‚é‚ÆŒ¸‚è‘±‚¯‚é
-	if (player->GetSpNow() == 1)
+	if (player->GetSpNow() == 2)
 	{
 		player->DecreaseSp(-2.0f);
 		if (player->GetSp() <= 0)
 		{
-			player->DecreaseSpNow(-1);
+			player->DecreaseSpNow(-2);
 		}
 	}
 
