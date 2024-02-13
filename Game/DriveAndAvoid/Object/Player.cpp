@@ -5,10 +5,13 @@
 // 燃料の最大値
 #define MAX_FUEL 20000
 
-Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f),
+Player::Player() : is_active(false), location(0.0f), box_size(0.0f),
 angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0), barrier(nullptr), sp(0.0f),spnow(0.0f)
 {
-
+	for (int i = 0; i < 3; i++)
+	{
+		image[i] = NULL;
+	}
 }
 
 Player::~Player()
@@ -27,14 +30,15 @@ void Player::Initialize()
 	hp = 1000;
 	sp = 0;
 	spnow = 0;
+	spmax = false;
 	fuel = MAX_FUEL;
 	barrier_count = 3;
 
 	//画像の読み込み
-	image = LoadGraph("Resource/images/car1pol.bmp");
+	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120,image);
 
 	//エラーチェック
-	if (image == -1)
+	if (result == -1)
 	{
 		throw("Resource/images/car1pol.bmpがありません\n");
 	}
@@ -104,12 +108,18 @@ void Player::Update()
 void Player::Draw()
 {
 	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
+	DrawRotaGraphF(location.x, location.y, 1.0, angle, image[1], TRUE);
 
 	//バリアが生成されていたら、描画を行う
 	if (barrier != nullptr)
 	{
 		barrier->Draw(this->location);
+	}
+	if (GetHp() <= 500.0f) {
+		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
+	}
+	if (GetHp() <= 200.0f) {
+		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
 	}
 }
 
@@ -117,7 +127,9 @@ void Player::Draw()
 void Player::Finalize()
 {
 	//読み込んだ画像を削除
-	DeleteGraph(image);
+	DeleteGraph(image[0]);
+	DeleteGraph(image[1]);
+	DeleteGraph(image[2]);
 
 	//バリアが生成されていたら、削除する
 	if (barrier != nullptr)
@@ -145,6 +157,10 @@ void Player::DecreaseSp(float value)
 	// spゲージが1000を超えてしまった時
 	if (sp > 1000) {
 		this->sp = 1000; // spを1000にする。
+		spmax = true; // 使用出来るように伝える
+	}
+	else {
+		spmax = false; // 使用出来ないように伝える
 	}
 }
 
@@ -195,6 +211,19 @@ float Player::GetSp() const
 float Player::GetSpNow() const
 {
 	return this->spnow;
+}
+
+//SPは満タンか？を取得
+bool Player::GetSpMax() const
+{
+	if (sp == 1000)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //バリア枚数取得処理
