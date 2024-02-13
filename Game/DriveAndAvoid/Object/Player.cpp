@@ -142,6 +142,10 @@ void Player::DecreaseHp(float value)
 void Player::DecreaseSp(float value)
 {
 	this->sp += value;
+	// spゲージが1000を超えてしまった時
+	if (sp > 1000) {
+		this->sp = 1000; // spを1000にする。
+	}
 }
 
 //SP中かどうかの確認(0:増加中  1:待機中   2:減少中)
