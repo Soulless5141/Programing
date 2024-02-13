@@ -42,6 +42,7 @@ public:
 	float GetSpNow() const;        //SP状態取得
 	int GetBarriarCount() const;   //バリアの枚数取得
 	bool IsBarrier() const;          //バリア有効か？を取得
+	void AddFuel(float add);		//燃料を増やす処理
 	
 private:
 	void Movement();      //移動処理

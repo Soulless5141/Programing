@@ -83,6 +83,14 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
+	//アイテムの生成処理
+	if (mileage / 10 % 500 == 0)
+	{
+		int index = item.size();
+		item.emplace_back();
+		item[index].Initialize();
+	}
+
 	//SP上限設定
 	if (player->GetSp() >= 1000 && player->GetSpNow() == 0)
 	{
@@ -123,6 +131,29 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
+	//アイテムの更新と当たり判定チェック
+	for (int i = 0; i < item.size(); i++)
+	{
+		item[i].Update(player->GetSpeed());
+
+		//画面外に行ったら、敵を削除してスコア加算
+		if (item[i].GetLocation().y >= 640.0f)
+		{
+			item[i].Finalize();
+			item.erase(item.begin() + i);
+			i--;
+			continue;
+		}
+		// 当たり判定の確認
+		if (IsHitCheck(player, item[i])) {
+			// 燃料を500回復
+			player->AddFuel(500.f);
+			item[i].Finalize();
+			item.erase(item.begin() + i);
+			i--;
+		}
+	}
+
 	//SPゲージがたまると減り続ける
 	if (player->GetSpNow() == 2)
 	{
@@ -156,6 +187,10 @@ void GameMainScene::Draw() const
 		{
 			enemy[i]->Draw();
 		}
+	}
+
+	for (int i = 0; i < item.size(); i++) {
+		item[i].Draw();
 	}
 
 	//プレイヤーの描画
@@ -292,6 +327,20 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 
 	//当たり判定サイズの大きさを取得
 	Vector2D box_ex = p->GetBoxSize() + e->GetBoxSize();
+
+	//コリジョンデータより位置情報の差分が小さいなら、ヒット判定とする
+	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) <
+	box_ex.y));
+}
+
+//当たり判定処理（プレイヤーと敵）
+bool GameMainScene::IsHitCheck(Player* p, Item it)
+{
+	//位置情報の差分を取得
+	Vector2D diff_location = p->GetLocation() - it.GetLocation();
+
+	//当たり判定サイズの大きさを取得
+	Vector2D box_ex = p->GetBoxSize() + it.GetBoxSize();
 
 	//コリジョンデータより位置情報の差分が小さいなら、ヒット判定とする
 	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) <
