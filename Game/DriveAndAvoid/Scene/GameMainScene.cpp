@@ -83,12 +83,20 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
+	//SP上限設定
+	if (player->GetSp() >= 1000)
+	{
+		player->DecreaseSpNow(1);
+	}
+
 	//敵の更新と当たり判定チェック
 	for (int i = 0; i < 10; i++)
 	{
 		if (enemy[i] != nullptr)
 		{
 			enemy[i]->Update(player->GetSpeed());
+
+			
 
 			//画面外に行ったら、敵を削除してスコア加算
 			if (enemy[i]->GetLocation().y >= 640.0f)
@@ -97,6 +105,10 @@ eSceneType GameMainScene::Update()
 				enemy[i]->Finalize();
 				delete enemy[i];
 				enemy[i] = nullptr;
+				if (player->GetSpNow() == 0)     //上限1000のSP加算処理
+				{
+					player->DecreaseSp(200.0f);
+				}
 			}
 
 			//当たり判定の確認
@@ -108,6 +120,16 @@ eSceneType GameMainScene::Update()
 				delete enemy[i];
 				enemy[i] = nullptr;
 			}
+		}
+	}
+
+	//SPゲージがたまると減り続ける
+	if (player->GetSpNow() == 1)
+	{
+		player->DecreaseSp(-2.0f);
+		if (player->GetSp() <= 0)
+		{
+			player->DecreaseSpNow(-1);
 		}
 	}
 
@@ -179,7 +201,7 @@ void GameMainScene::Draw() const
 	fx = 510.0f;
 	fy = 350.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "SP GAGE");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetSp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 }
 
