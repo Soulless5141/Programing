@@ -84,7 +84,7 @@ eSceneType GameMainScene::Update()
 	}
 
 	//アイテムの生成処理
-	if ((mileage / 10) % 100 == 0)
+	if (mileage / 10 % 500 == 0)
 	{
 		int index = item.size();
 		item.emplace_back();
@@ -132,7 +132,7 @@ eSceneType GameMainScene::Update()
 			i--;
 			continue;
 		}
-
+		// 当たり判定の確認
 		if (IsHitCheck(player, item[i])) {
 			item[i].Finalize();
 			item.erase(item.begin() + i);
