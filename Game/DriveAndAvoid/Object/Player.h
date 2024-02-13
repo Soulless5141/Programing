@@ -14,6 +14,8 @@ private:
 	float speed;          //速さ
 	float hp;             //体力
 	float fuel;              //燃料
+	float sp;            //spゲージ
+	float spnow;
 	int barrier_count;    //バリアの枚数
 	Barrier* barrier;     //バリア
 
@@ -29,11 +31,15 @@ public:
 public:
 	void SetActive(bool flg);    //有効フラグ設定
 	void DecreaseHp(float value);  //体力減少処理
+	void DecreaseSp(float value);  //SP減少処理
+	void DecreaseSpNow(float value);  //SP減少処理
 	Vector2D GetLocation() const;  //位置座標取得処理
 	Vector2D GetBoxSize() const;   //当たり判定の大きさ取得
 	float GetSpeed() const;          //速さ取得処理
 	float GetFuel() const;           //燃料取得
 	float GetHp() const;           //体力取得
+	float GetSp() const;           //SP取得
+	float GetSpNow() const;        //SP状態取得
 	int GetBarriarCount() const;   //バリアの枚数取得
 	bool IsBarrier() const;          //バリア有効か？を取得
 	
