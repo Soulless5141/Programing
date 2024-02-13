@@ -110,13 +110,13 @@ eSceneType GameMainScene::Update()
 			if (enemy[i]->GetLocation().y >= 640.0f)
 			{
 				enemy_count[enemy[i]->GetType()]++;
-				enemy[i]->Finalize();
-				delete enemy[i];
-				enemy[i] = nullptr;
 				if (player->GetSpNow() == 0)     //上限1000のSP加算処理
 				{
-					player->DecreaseSp((i + 1) * 100.0f);
+					player->DecreaseSp((enemy[i]->GetType() + 1 )* 100.0f); // 画面外に行った車の種類によって、ポイントが変わる。
 				}
+				enemy[i]->Finalize();
+				delete enemy[i];
+				enemy[i] = nullptr;				
 			}
 
 			//当たり判定の確認
@@ -246,6 +246,11 @@ void GameMainScene::Draw() const
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "SP GAGE");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetSp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
+	if (player->GetSpMax() == true) 
+	{
+		DrawFormatStringF(fx + 20.0f, fy + 22.0f, GetColor(0, 0, 0), "Yを押せ！"); // Yを押すように誘導させる
+	}
+	DrawFormatString(510, 300, 0xffffff, "躱した：%f", player->GetSp());
 }
 
 //終了時処理

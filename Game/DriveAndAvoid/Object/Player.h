@@ -15,7 +15,8 @@ private:
 	float hp;             //体力
 	float fuel;              //燃料
 	float sp;            //spゲージ
-	float spnow;
+	float spnow;		 //sp使用中かどうか
+	bool spmax;			 //spがマックスかどうか
 	int barrier_count;    //バリアの枚数
 	Barrier* barrier;     //バリア
 
@@ -40,6 +41,7 @@ public:
 	float GetHp() const;           //体力取得
 	float GetSp() const;           //SP取得
 	float GetSpNow() const;        //SP状態取得
+	bool GetSpMax() const;			   //SPが使えるか状態出す関数
 	int GetBarriarCount() const;   //バリアの枚数取得
 	bool IsBarrier() const;          //バリア有効か？を取得
 	void AddFuel(float add);		//燃料を増やす処理

@@ -27,6 +27,7 @@ void Player::Initialize()
 	hp = 1000;
 	sp = 0;
 	spnow = 0;
+	spmax = false;
 	fuel = MAX_FUEL;
 	barrier_count = 3;
 
@@ -145,6 +146,10 @@ void Player::DecreaseSp(float value)
 	// spゲージが1000を超えてしまった時
 	if (sp > 1000) {
 		this->sp = 1000; // spを1000にする。
+		spmax = true; // 使用出来るように伝える
+	}
+	else {
+		spmax = false; // 使用出来ないように伝える
 	}
 }
 
@@ -195,6 +200,19 @@ float Player::GetSp() const
 float Player::GetSpNow() const
 {
 	return this->spnow;
+}
+
+//SPは満タンか？を取得
+bool Player::GetSpMax() const
+{
+	if (sp == 1000)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //バリア枚数取得処理
