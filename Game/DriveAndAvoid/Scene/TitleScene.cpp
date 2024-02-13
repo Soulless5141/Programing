@@ -36,6 +36,8 @@ void TitleScene::Initialize()
 	{
 		throw("Resource/images/cone.bmp‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
+
+	SetFontSize(48);
 }
 
 //XVˆ—
