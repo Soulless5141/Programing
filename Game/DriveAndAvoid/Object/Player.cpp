@@ -40,7 +40,7 @@ void Player::Initialize()
 	//エラーチェック
 	if (result == -1)
 	{
-		throw("Resource/images/car1pol.bmpがありません\n");
+		throw("Resource/images/car.bmpがありません\n");
 	}
 }
 
@@ -289,6 +289,7 @@ void Player::Acceleration()
 	}
 }
 
+//燃料増やす
 void Player::AddFuel(float add) {
 	fuel += add;
 	if (fuel >= MAX_FUEL) {

@@ -16,12 +16,12 @@ HelpScene::~HelpScene()
 void HelpScene::Initialize()
 {
 	//画像の読み込み
-	background_image = LoadGraph("Resource/images/Title.bmp");
+	background_image = LoadGraph("Resource/images/Title.png");
 
 	//エラーチェック
 	if (background_image == -1)
 	{
-		throw("Resource/images/Title.bmpがありません\n");
+		throw("Resource/images/Title.pngがありません\n");
 	}
 }
 
@@ -43,17 +43,21 @@ void HelpScene::Draw() const
 	DrawGraph(0, 0, background_image, FALSE);
 
 	//ゲーム説明
-	SetFontSize(16);
-	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
+	SetFontSize(30);
 
-	DrawString(20, 160, "これは障害物を避けたり、壊しながら", 0xffffff, 0);
-	DrawString(20, 180, "距離を稼ぐゲームです", 0xffffff, 0);
-	DrawString(20, 200, "燃料が尽きるか障害物に", 0xffffff, 0);
-	DrawString(20, 220, "数回当たるとゲームオーバーです。", 0xffffff, 0);
-	DrawString(20, 240, "敵をよけ続けると爆笑ゲージがたまり、", 0xffffff, 0);
-	DrawString(20, 260, "ゲージを発動すると敵を倒せるようになります！", 0xffffff, 0);
+	DrawString(240, 20, "ヘルプ画面", 0, 0);
 
-	DrawString(150, 450, "----- Bボタンを押してタイトルへ戻る -----", 0xffffff, 0);
+	SetFontSize(18);
+
+	DrawString(160, 80, "これは障害物を避けながら", 0, 0);
+	DrawString(160, 100, "距離を稼ぐゲームです", 0, 0);
+	DrawString(160, 120, "燃料が尽きるか障害物に", 0, 0);
+	DrawString(160, 140, "数回当たるとゲームオーバーです。", 0, 0);
+	DrawString(160, 160, "敵を避け続けると爆笑ゲージがたまり、", 0, 0);
+	DrawString(160, 180, "MAXのときYを押してゲージを発動すると", 0, 0);
+	DrawString(160, 200, "敵を倒せるようになります！", 0, 0);
+
+	DrawString(135, 450, "----- Bボタンを押してタイトルへ戻る -----", 0, 0);
 }
 
 //終了時処理
