@@ -3,7 +3,7 @@
 #include"DxLib.h"
 
 Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f),
-angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0), barrier(nullptr)
+angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0), barrier(nullptr), sp(0.0f),spnow(0.0f)
 {
 
 }
@@ -22,6 +22,8 @@ void Player::Initialize()
 	angle = 0.0f;
 	speed = 3.0f;
 	hp = 1000;
+	sp = 0;
+	spnow = 0;
 	fuel = 20000;
 	barrier_count = 3;
 
@@ -124,6 +126,19 @@ void Player::DecreaseHp(float value)
 	this->hp += value;
 }
 
+//SP増減処理
+void Player::DecreaseSp(float value)
+{
+	this->sp += value;
+}
+
+//SP中かどうかの確認(0:増加中  1:減少中)
+void Player::DecreaseSpNow(float value)
+{
+	this->spnow += value;
+}
+
+
 //位置情報取得処理
 Vector2D Player::GetLocation() const
 {
@@ -152,6 +167,18 @@ float Player::GetFuel() const
 float Player::GetHp() const
 {
 	return this->hp;
+}
+
+//SP取得処理
+float Player::GetSp() const
+{
+	return this->sp;
+}
+
+//SP取得処理
+float Player::GetSpNow() const
+{
+	return this->spnow;
 }
 
 //バリア枚数取得処理
