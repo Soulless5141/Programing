@@ -260,6 +260,7 @@ void Player::Acceleration()
 	}
 }
 
+//”R—¿‘‚â‚·
 void Player::AddFuel(float add) {
 	fuel += add;
 	if (fuel >= MAX_FUEL) {
