@@ -27,7 +27,9 @@ void GameMainScene::Initialize()
 	//画像の読み込み
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
-	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
+	enemy_image[1] = LoadGraph("Resource/images/Enemy2.jpg");
+	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
 
 	//エラーチェック
 	if (back_ground == -1)
@@ -35,9 +37,20 @@ void GameMainScene::Initialize()
 		throw("Resource/images/back.bmpがありません\n");
 	}
 
-	if (result == -1)
+	if (enemy_image[0] == -1)
 	{
-		throw("Resource/images/barrier.pngがありません\n");
+		throw("Resource/images/Enemy1.pngがありません\n");
+	}
+
+
+	if (enemy_image[1] == -1)
+	{
+		throw("Resource/images/Enemy2.jpgがありません\n");
+	}
+
+	if (enemy_image[2] == -1)
+	{
+		throw("Resource/images/Enemy3.pngがありません\n");
 	}
 
 	if (barrier_image == -1)
@@ -75,7 +88,7 @@ eSceneType GameMainScene::Update()
 		{
 			if (enemy[i] == nullptr)
 			{
-				int type = GetRand(3) % 3;
+				int type = /*GetRand(3)*/i % 3;
 				enemy[i] = new Enemy(type, enemy_image[type]);
 				enemy[i]->Initialize();
 				break;
