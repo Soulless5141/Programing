@@ -73,6 +73,9 @@ void GameMainScene::Initialize()
 	enemy_size[0] = Vector2D(31.0f, 21.f);
 	enemy_size[1] = Vector2D(31.0f, 27.f);
 	enemy_size[2] = Vector2D(31.0f, 31.f);
+
+	yButtonAlpha = 255;
+	yButtonAddAlpha = -30;
 }
 
 //XVˆ—
@@ -197,6 +200,21 @@ eSceneType GameMainScene::Update()
 		return eSceneType::E_RESULT;
 	}
 
+	if (player->GetSpMax() == true)
+	{
+		yButtonAlpha += yButtonAddAlpha;
+		if (yButtonAlpha <= 0)
+		{
+			yButtonAlpha = 0;
+			yButtonAddAlpha *= -1;
+		}
+		else if (yButtonAlpha >= 255)
+		{
+			yButtonAlpha = 255;
+			yButtonAddAlpha *= -1;
+		}
+	}
+
 	return GetNowScene();
 }
 
@@ -267,7 +285,9 @@ void GameMainScene::Draw() const
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 	if (player->GetSpMax() == true) 
 	{
-		DrawFormatStringF(fx + 20.0f, fy + 22.0f, GetColor(0, 0, 0), "Y‚ð‰Ÿ‚¹I"); // Y‚ð‰Ÿ‚·‚æ‚¤‚É—U“±‚³‚¹‚é
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, yButtonAlpha);
+		DrawFormatStringF(fx + 20.0f, fy + 22.0f, GetColor(255, 0, 0), "Y‚ð‰Ÿ‚¹I"); // Y‚ð‰Ÿ‚·‚æ‚¤‚É—U“±‚³‚¹‚é
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 	DrawFormatString(510, 300, 0xffffff, "ç]‚µ‚½F%f", player->GetSp());
 }

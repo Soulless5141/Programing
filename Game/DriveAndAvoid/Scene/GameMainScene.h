@@ -20,7 +20,9 @@ private:
 	Player* player;        //プレイヤー
 	Enemy** enemy;         //敵
 	std::vector<Item> item;//アイテム
-	Vector2D enemy_size[3];
+	Vector2D enemy_size[3];// 敵の当たり判定のサイズ
+	int yButtonAlpha;		//「Yを押せ！」の透明度
+	int yButtonAddAlpha;	//「Yを押せ！」の透明度の変化値
 
 public:
 	GameMainScene();
