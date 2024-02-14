@@ -28,7 +28,7 @@ void GameMainScene::Initialize()
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
-	enemy_image[1] = LoadGraph("Resource/images/Enemy2.jpg");
+	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
 
 	//エラーチェック
@@ -45,7 +45,7 @@ void GameMainScene::Initialize()
 
 	if (enemy_image[1] == -1)
 	{
-		throw("Resource/images/Enemy2.jpgがありません\n");
+		throw("Resource/images/Enemy2.pngがありません\n");
 	}
 
 	if (enemy_image[2] == -1)
