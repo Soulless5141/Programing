@@ -114,10 +114,10 @@ void Player::Draw()
 	}
 
 	//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì•`‰æ
-	if (GetHp() <= 200.0f) {
+	if (hp <= 200.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
 	}
-	else if (GetHp() <= 500.0f) {
+	else if (hp <= 500.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
 	}
 	else {
