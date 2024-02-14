@@ -225,7 +225,7 @@ void GameMainScene::Draw() const
 	DrawFormatString(510, 80, GetColor(0, 0, 0), "”ğ‚¯‚½”");
 	for (int i = 0; i < 3; i++)
 	{
-		DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE, FALSE);
+		DrawRotaGraph(523 + (i * 50), 120, 0.8, 0, enemy_image[i], TRUE, FALSE);
 		DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d", enemy_count[i]);
 	}
 	DrawFormatString(510, 200, GetColor(0, 0, 0), "‘–s‹——£");
