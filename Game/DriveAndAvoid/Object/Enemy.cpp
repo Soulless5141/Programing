@@ -27,7 +27,20 @@ void Enemy::Initialize()
 	//速さの設定
 	speed = (float)((this->type + 1) * 2) + 2.f;
 	//爆破データ読み込み
-	LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 100, 100, ex_img);
+	ex_img_check = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 100, 100, ex_img);
+	//敵の音声データ読み込み
+	ex_se_check = LoadSoundMem("Resource/se/enemy_explosion .mp3", ex_se);
+
+	// 画像が入ってるか？
+	if (ex_img_check == -1)
+	{
+		throw("Resource/images/explosion.pngがありません\n");
+	}
+	// SEが入っているか？
+	if (ex_se_check == -1)
+	{
+		throw("Resource/se/enemy_explosion .mp3がありません\n");
+	}
 }
 
 void Enemy::Update(float speed)
@@ -56,7 +69,8 @@ void Enemy::Draw() const
 {
 	if (ex_flg == 1)
 	{
-		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, ex_img[ex_num], TRUE); // アニメーション（仮）
+		// アニメーション
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, ex_img[ex_num], TRUE);
 	}
 	else
 	{
@@ -93,6 +107,8 @@ void Enemy::AnimEx()
 {
 	ex_flg = 1;
 	ex_num = 0;
+	// 音声入れる
+	PlaySoundMem(ex_se, DX_PLAYTYPE_BACK, FALSE);
 }
 
 // 爆破フラグをゲットする

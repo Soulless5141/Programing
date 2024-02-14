@@ -71,6 +71,9 @@ void GameMainScene::Initialize()
 		throw("Resource/images/car.bmpがありません\n");
 	}
 
+	//BGM再生
+	PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, TRUE);
+
 	//オブジェクトの生成
 	player = new Player;
 	enemy = new Enemy* [10];
@@ -247,8 +250,8 @@ void GameMainScene::Draw() const
 	DrawGraph(0, mileage % 480 - 480, back_ground, TRUE);
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
 
-	//BGM再生
-	PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, FALSE);
+	////BGM再生
+	//PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, TRUE);
 
 	//敵の描画
 	for (int i = 0; i < 10; i++)

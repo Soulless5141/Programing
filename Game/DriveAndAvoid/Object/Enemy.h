@@ -10,7 +10,10 @@ private:
 	float speed;        //速さ
 	int ex_img[16];			// 爆破画像を入れるデータ
 	int ex_flg;			// 爆破フラグ
-	int ex_num;
+	int ex_num;			// アニメーション画像を進める変数
+	int ex_img_check;	// 中に画像があるか確認する変数
+	int ex_se;			// se入れる変数
+	int ex_se_check;	// 爆破SEが入ってるか確認
 	Vector2D location;   //位置情報
 	Vector2D box_size;   //当たり判定の大きさ
 
