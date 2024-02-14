@@ -51,7 +51,7 @@ void Player::Update()
 	if (!is_active)
 	{
 		angle += DX_PI_F / 24.0f;
-		speed = 1.0f;
+		speed = 3.0f;
 		if (angle >= DX_PI_F * 4.0f)
 		{
 			is_active = true;
@@ -59,8 +59,11 @@ void Player::Update()
 		return;
 	}
 
-	//燃料の消費
-	fuel -= speed;
+	// 爆笑ゲージが使用中じゃない時
+	if (spnow != 2) {
+		//燃料の消費
+		fuel -= speed;
+	}
 
 	//移動処理
 	Movement();
@@ -114,10 +117,10 @@ void Player::Draw()
 	}
 
 	//プレイヤー画像の描画
-	if (GetHp() <= 200.0f) {
+	if (hp <= 200.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
 	}
-	else if (GetHp() <= 500.0f) {
+	else if (hp <= 500.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
 	}
 	else {
@@ -266,6 +269,7 @@ void Player::Movement()
 		move += Vector2D(0.0f, 1.0f);
 	}
 
+	move *= speed / 3.f;
 	location += move;
 
 	//画面外に行かないように制限する
@@ -280,7 +284,7 @@ void Player::Movement()
 void Player::Acceleration()
 {
 	//LBボタンが押されたら、減速する
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 3.0f)
 	{
 		speed -= 1.0f;
 	}
