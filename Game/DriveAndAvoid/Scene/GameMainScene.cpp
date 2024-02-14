@@ -140,6 +140,10 @@ eSceneType GameMainScene::Update()
 		{
 			enemy[i]->Update(player->GetSpeed());
 
+			if (enemy[i]->IsPlayExplosion() == true) {
+				continue;
+			}
+
 			if (enemy[i]->GetExFlg() == 2)
 			{
 				enemy[i]->Finalize();

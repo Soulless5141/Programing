@@ -41,6 +41,8 @@ void Enemy::Initialize()
 	{
 		throw("Resource/se/enemy_explosion.wav‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
+
+	ex_flg = 0;
 }
 
 void Enemy::Update(float speed)
@@ -48,7 +50,12 @@ void Enemy::Update(float speed)
 	////ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
 	//location += Vector2D(0.0f, this->speed + speed - 5);
 
-	if (ex_flg == 1)
+	if (ex_flg == 0)
+	{
+		//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
+		location += Vector2D(0.0f, this->speed + speed - 5);
+	}
+	else if (ex_flg == 1)
 	{
 		//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
 		location += Vector2D(0.0f, 3);
@@ -59,24 +66,19 @@ void Enemy::Update(float speed)
 			ex_flg = 2;
 		}
 	}
-	else
-	{
-		//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
-		location += Vector2D(0.0f, this->speed + speed - 5);
-	}
 }
 
 void Enemy::Draw() const
 {
-	if (ex_flg == 1)
-	{
-		// ƒAƒjƒ[ƒVƒ‡ƒ“
-		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, ex_img[ex_num], TRUE);
-	}
-	else
+	if (ex_flg == 0)
 	{
 		//“G‰æ‘œ‚Ì•`‰æ
 		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	}
+	else if (ex_flg == 1)
+	{
+		// ƒAƒjƒ[ƒVƒ‡ƒ“
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, ex_img[ex_num], TRUE);
 	}
 }
 
@@ -116,4 +118,8 @@ void Enemy::AnimEx()
 int Enemy::GetExFlg()
 {
 	return this->ex_flg;
+}
+
+bool Enemy::IsPlayExplosion() {
+	return CheckSoundMem(ex_se) == TRUE;
 }
