@@ -34,7 +34,7 @@ void GameMainScene::Initialize()
 	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
 	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
-	int explosion = LoadDivGraph("Resource/images/bomb.png", 58, 6, 10, 32, 32, explosion_image);
+	//int explosion = LoadDivGraph("Resource/images/bomb.png", 58, 6, 10, 32, 32, explosion_image);
 
 	//エラーチェック
 	if (back_ground == -1)
@@ -58,10 +58,10 @@ void GameMainScene::Initialize()
 		throw("Resource/images/Enemy3.pngがありません\n");
 	}
 
-	if (explosion == -1)
-	{
-		throw("Resource/images/bomb.pngがありません\n");
-	}
+	//if (explosion == -1)
+	//{
+	//	throw("Resource/images/bomb.pngがありません\n");
+	//}
 
 	if (barrier_image == -1)
 	{
