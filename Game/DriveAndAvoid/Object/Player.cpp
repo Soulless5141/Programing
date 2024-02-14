@@ -51,7 +51,7 @@ void Player::Update()
 	if (!is_active)
 	{
 		angle += DX_PI_F / 24.0f;
-		speed = 1.0f;
+		speed = 3.0f;
 		if (angle >= DX_PI_F * 4.0f)
 		{
 			is_active = true;
@@ -269,6 +269,7 @@ void Player::Movement()
 		move += Vector2D(0.0f, 1.0f);
 	}
 
+	move *= speed / 3.f;
 	location += move;
 
 	//画面外に行かないように制限する
@@ -283,7 +284,7 @@ void Player::Movement()
 void Player::Acceleration()
 {
 	//LBボタンが押されたら、減速する
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 3.0f)
 	{
 		speed -= 1.0f;
 	}

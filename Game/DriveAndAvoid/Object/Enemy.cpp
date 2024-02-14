@@ -22,13 +22,13 @@ void Enemy::Initialize()
 	//“–‚½‚è”»’è‚ÌÝ’è
 	//box_size = Vector2D(31.0f, 60.0f);
 	//‘¬‚³‚ÌÝ’è
-	speed = (float)(this->type * 2);
+	speed = (float)((this->type + 1) * 2) + 2.f;
 }
 
 void Enemy::Update(float speed)
 {
 	//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
-	location += Vector2D(0.0f, this->speed + speed - 6);
+	location += Vector2D(0.0f, this->speed + speed - 5);
 }
 
 void Enemy::Draw() const
