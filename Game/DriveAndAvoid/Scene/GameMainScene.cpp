@@ -92,7 +92,7 @@ eSceneType GameMainScene::Update()
 		{
 			if (enemy[i] == nullptr)
 			{
-				int type = /*GetRand(3)*/i % 3;
+				int type = GetRand(3) % 3;
 				enemy[i] = new Enemy(type, enemy_image[type], enemy_size[type]);
 				enemy[i]->Initialize();
 				break;
@@ -141,6 +141,8 @@ eSceneType GameMainScene::Update()
 			{
 				// ”šÎƒQ[ƒWŽg—p’†‚©‚Ç‚¤‚©H
 				if (player->GetSpNow() == 2) {
+					// ”R—¿‚ð500‰ñ•œ
+					player->AddFuel(500.f);
 					enemy[i]->Finalize();
 					delete enemy[i];
 					enemy[i] = nullptr;
@@ -171,8 +173,8 @@ eSceneType GameMainScene::Update()
 		}
 		// “–‚½‚è”»’è‚ÌŠm”F
 		if (IsHitCheck(player, item[i])) {
-			// ”R—¿‚ð500‰ñ•œ
-			player->AddFuel(500.f);
+			// ”R—¿‚ð1000‰ñ•œ
+			player->AddFuel(1000.f);
 			item[i].Finalize();
 			item.erase(item.begin() + i);
 			i--;
