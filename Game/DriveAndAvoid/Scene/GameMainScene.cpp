@@ -35,6 +35,7 @@ void GameMainScene::Initialize()
 	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
 	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
+	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.mp3");
 
 	//エラーチェック
 	if (back_ground == -1)
@@ -163,6 +164,7 @@ eSceneType GameMainScene::Update()
 				else {  // 爆笑ゲージ使用していなければ
 					player->SetActive(false);
 					player->DecreaseHp(-100.0f);
+					PlaySoundMem(PexplosionSE,DX_PLAYTYPE_BACK,TRUE);
 					enemy[i]->Finalize();
 					delete enemy[i];
 					enemy[i] = nullptr;
