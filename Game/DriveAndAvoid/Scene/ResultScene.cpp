@@ -81,10 +81,10 @@ void ResultScene::Draw() const
 	{
 		DrawRotaGraph(230, 230 + (i * 20), 0.4f, 0.0, enemy_image[i], TRUE);
 		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d,",
-			enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
+			enemy_count[i], (i + 1) * 500, (i + 1) * 500 * enemy_count[i]);
 	}
 	DrawString(180, 290, "スコア", GetColor(0, 0, 0));
-	DrawFormatString(180, 290, 0xFFFFFF, "      =%6d", score);
+	DrawFormatString(180, 290, 0xFFFFFF, "      = %6d", score);
 }
 	//終了時処理
 void ResultScene::Finalize()
