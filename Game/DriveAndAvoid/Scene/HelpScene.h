@@ -5,6 +5,7 @@ class HelpScene : public SceneBase
 {
 private:
 	int background_image;  //”wŒi‰æ‘œ
+	bool operation_flg;	   // à–¾‰æ–Ê‚És‚­‚©•·‚­ƒtƒ‰ƒO
 
 public:
 	HelpScene();
