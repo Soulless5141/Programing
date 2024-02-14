@@ -21,6 +21,10 @@ void TitleScene::Initialize()
 	menu_image = LoadGraph("Resource/images/menu.bmp");
 	cursor_image = LoadGraph("Resource/images/cone.bmp");
 
+	//BGM読み込み
+	title_bgm = LoadSoundMem("Resource/bgm/TitleBGM.wav");
+	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
+
 	//エラーチェック
 	if (background_image == -1)
 	{
@@ -97,6 +101,8 @@ void TitleScene::Draw() const
 	DrawRotaGraph(60, 250 + menu_cursor * 40, 0.7, DX_PI / 2.0, cursor_image, TRUE);
 
 	DrawString(50, 100, "ニコちゃんは旅に出る。", 0xFF0000);
+	
+	PlaySoundMem(title_bgm, DX_PLAYTYPE_BACK, FALSE);
 }
 
 //終了時処理
@@ -106,6 +112,7 @@ void TitleScene::Finalize()
 	DeleteGraph(background_image);
 	DeleteGraph(menu_image);
 	DeleteGraph(cursor_image);
+	StopSoundMem(title_bgm);
 }
 
 //現在のシーン情報を取得

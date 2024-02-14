@@ -46,6 +46,8 @@ void RankingDispScene::Draw() const
 	//背景画像の描画
 	DrawGraph(0, 0, background_image, FALSE);
 
+	SetFontSize(16);
+
 	//取得したランキングデータを描画する
 	for (int i = 0; i < 5; i++)
 	{
