@@ -46,6 +46,9 @@ void TitleScene::Initialize()
 //更新処理
 eSceneType TitleScene::Update()
 {
+	//BGM再生
+	PlaySoundMem(title_bgm, DX_PLAYTYPE_LOOP, FALSE);
+
 	//カーソル下移動
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
 	{
@@ -101,9 +104,7 @@ void TitleScene::Draw() const
 
 	//タイトルの描画
 	DrawString(50, 100, "ニコちゃんは旅に出る。", 0xFF0000);
-	
-	//BGM再生
-	PlaySoundMem(title_bgm, DX_PLAYTYPE_BACK, FALSE);
+
 }
 
 //終了時処理
