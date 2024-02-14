@@ -14,9 +14,10 @@ private:
 	float speed;          //速さ
 	float hp;             //体力
 	float fuel;              //燃料
-	float sp;            //spゲージ
-	float spnow;		 //sp使用中かどうか
-	bool spmax;			 //spがマックスかどうか
+	float nico;            //nicoゲージ
+	float niconow;		 //nico使用中かどうか
+	bool nicomax;			 //nicoがマックスかどうか
+	int nico_se;			 //爆笑ゲージマックスの時に鳴らす処理
 	int barrier_count;    //バリアの枚数
 	Barrier* barrier;     //バリア
 
@@ -32,16 +33,16 @@ public:
 public:
 	void SetActive(bool flg);    //有効フラグ設定
 	void DecreaseHp(float value);  //体力減少処理
-	void DecreaseSp(float value);  //SP増減処理
-	void DecreaseSpNow(float value);  //SP中かどうかの確認(0:増加中  1:待機中   2:減少中)
+	void DecreaseSp(float value);  //nico増減処理
+	void DecreaseSpNow(float value);  //nico中かどうかの確認(0:増加中  1:待機中   2:減少中)
 	Vector2D GetLocation() const;  //位置座標取得処理
 	Vector2D GetBoxSize() const;   //当たり判定の大きさ取得
 	float GetSpeed() const;          //速さ取得処理
 	float GetFuel() const;           //燃料取得
 	float GetHp() const;           //体力取得
-	float GetSp() const;           //SP取得
-	float GetSpNow() const;        //SP状態取得
-	bool GetSpMax() const;			   //SPが使えるか状態出す関数
+	float GetSp() const;           //nico取得
+	float GetSpNow() const;        //nico状態取得
+	bool GetSpMax() const;			   //nicoが使えるか状態出す関数
 	int GetBarriarCount() const;   //バリアの枚数取得
 	bool IsBarrier() const;          //バリア有効か？を取得
 	void AddFuel(float add);		//燃料を増やす処理

@@ -127,7 +127,7 @@ eSceneType GameMainScene::Update()
 		item[index].Initialize();
 	}
 
-	//SPãŒÀÝ’è
+	//nicoãŒÀÝ’è
 	if (player->GetSp() >= 1000 && player->GetSpNow() == 0)
 	{
 		player->DecreaseSpNow(1);
@@ -156,7 +156,7 @@ eSceneType GameMainScene::Update()
 			if (enemy[i]->GetLocation().y >= 640.0f)
 			{
 				enemy_count[enemy[i]->GetType()]++;
-				if (player->GetSpNow() == 0)     //ãŒÀ1000‚ÌSP‰ÁŽZˆ—
+				if (player->GetSpNow() == 0)     //ãŒÀ1000‚Ìnico‰ÁŽZˆ—
 				{
 					player->DecreaseSp((enemy[i]->GetType() + 1 )* 100.0f); // ‰æ–ÊŠO‚És‚Á‚½ŽÔ‚ÌŽí—Þ‚É‚æ‚Á‚ÄAƒ|ƒCƒ“ƒg‚ª•Ï‚í‚éB
 				}
@@ -213,7 +213,7 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
-	//SPƒQ[ƒW‚ª‚½‚Ü‚é‚ÆŒ¸‚è‘±‚¯‚é
+	//nicoƒQ[ƒW‚ª‚½‚Ü‚é‚ÆŒ¸‚è‘±‚¯‚é
 	if (player->GetSpNow() == 2)
 	{
 		player->DecreaseSp(-2.0f);
@@ -309,10 +309,10 @@ void GameMainScene::Draw() const
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 
-	//SPƒQ[ƒW‚Ì•`‰æ
+	//nicoƒQ[ƒW‚Ì•`‰æ
 	fx = 510.0f;
 	fy = 350.0f;
-	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "SP GAGE");
+	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "nico GAGE");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetSp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 	if (player->GetSpMax() == true) 

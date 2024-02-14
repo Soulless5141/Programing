@@ -6,7 +6,7 @@
 #define MAX_FUEL 20000
 
 Player::Player() : is_active(false), location(0.0f), box_size(0.0f),
-angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0), barrier(nullptr), sp(0.0f),spnow(0.0f)
+angle(0.0f), speed(0.0f), hp(0.0f), fuel(0.0f),nico(0.0f),niconow(0.0f),nicomax(false),nico_se(NULL), barrier_count(0), barrier(nullptr)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -28,19 +28,27 @@ void Player::Initialize()
 	angle = 0.0f;
 	speed = 5.0f;
 	hp = 1000;
-	sp = 0;
-	spnow = 0;
-	spmax = false;
+	nico = 0;
+	niconow = 0;
+	nicomax = false;
 	fuel = MAX_FUEL;
 	barrier_count = 3;
 
 	//画像の読み込み
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120,image);
 
+	//nicoゲージMax時の音声の読み込み
+	nico_se = LoadSoundMem("Resource/se/nico.wav");
+
 	//エラーチェック
 	if (result == -1)
 	{
 		throw("Resource/images/car.bmpがありません\n");
+	}
+
+	if (nico_se == -1)
+	{
+		throw("Resource/se/nico.wavがありません\n");
 	}
 }
 
@@ -60,7 +68,7 @@ void Player::Update()
 	}
 
 	// 爆笑ゲージが使用中じゃない時
-	if (spnow != 2) {
+	if (niconow != 2) {
 		//燃料の消費
 		fuel -= speed;
 	}
@@ -97,10 +105,10 @@ void Player::Update()
 		}
 	}
 
-	//SPゲージがたまっているとき、Yを押すと発動
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_Y) && GetSpNow() == 1)
+	//nicoゲージがたまっているとき、Yを押すと発動
+	if (GetSpNow() == 1)
 	{
-		if (GetSpNow() == 1)
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_Y))
 		{
 			DecreaseSpNow(1);
 		}
@@ -155,24 +163,26 @@ void Player::DecreaseHp(float value)
 	this->hp += value;
 }
 
-//SP増減処理
+//nico増減処理
 void Player::DecreaseSp(float value)
 {
-	this->sp += value;
-	// spゲージが1000を超えてしまった時
-	if (sp > 1000) {
-		this->sp = 1000; // spを1000にする。
-		spmax = true; // 使用出来るように伝える
+	this->nico += value;
+	// nicoゲージが1000以上の時
+	if (nico >= 1000) {
+		this->nico = 1000; // nicoを1000にする。
+		nicomax = true; // 使用出来るように伝える
+		// ここに笑い声1回鳴らす
+		PlaySoundMem(nico_se, DX_PLAYTYPE_BACK, TRUE);
 	}
 	else {
-		spmax = false; // 使用出来ないように伝える
+		nicomax = false; // 使用出来ないように伝える
 	}
 }
 
-//SP中かどうかの確認(0:増加中  1:待機中   2:減少中)
+//nico中かどうかの確認(0:増加中  1:待機中   2:減少中)
 void Player::DecreaseSpNow(float value)
 {
-	this->spnow += value;
+	this->niconow += value;
 }
 
 
@@ -206,22 +216,22 @@ float Player::GetHp() const
 	return this->hp;
 }
 
-//SP取得処理
+//nico取得処理
 float Player::GetSp() const
 {
-	return this->sp;
+	return this->nico;
 }
 
-//SP取得処理
+//nico取得処理
 float Player::GetSpNow() const
 {
-	return this->spnow;
+	return this->niconow;
 }
 
-//SPは満タンか？を取得
+//nicoは満タンか？を取得
 bool Player::GetSpMax() const
 {
-	if (sp == 1000)
+	if (nico == 1000)
 	{
 		return true;
 	}
