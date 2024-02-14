@@ -59,8 +59,11 @@ void Player::Update()
 		return;
 	}
 
-	//燃料の消費
-	fuel -= speed;
+	// 爆笑ゲージが使用中じゃない時
+	if (spnow != 2) {
+		//燃料の消費
+		fuel -= speed;
+	}
 
 	//移動処理
 	Movement();
@@ -114,10 +117,10 @@ void Player::Draw()
 	}
 
 	//プレイヤー画像の描画
-	if (GetHp() <= 200.0f) {
+	if (hp <= 200.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
 	}
-	else if (GetHp() <= 500.0f) {
+	else if (hp <= 500.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
 	}
 	else {
