@@ -107,19 +107,21 @@ void Player::Update()
 //描画処理
 void Player::Draw()
 {
-	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, angle, image[1], TRUE);
-
 	//バリアが生成されていたら、描画を行う
 	if (barrier != nullptr)
 	{
 		barrier->Draw(this->location);
 	}
-	if (GetHp() <= 500.0f) {
-		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
-	}
+
+	//プレイヤー画像の描画
 	if (GetHp() <= 200.0f) {
 		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
+	}
+	else if (GetHp() <= 500.0f) {
+		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
+	}
+	else {
+		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[1], TRUE);
 	}
 }
 
