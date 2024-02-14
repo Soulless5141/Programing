@@ -17,12 +17,12 @@ RankingInputScene::~RankingInputScene()
 void RankingInputScene::Initialize()
 {
 	//画像の読み込み
-	background_image = LoadGraph("Resource/images/Ranking.bmp");
+	background_image = LoadGraph("Resource/images/Ranking.png");
 
 	//エラーチェック
 	if (background_image == -1)
 	{
-		throw("Resource/images/Ranking.bmpがありません\n");
+		throw("Resource/images/Ranking.pngがありません\n");
 	}
 
 	//メモリの動的確保
@@ -74,8 +74,14 @@ void RankingInputScene::Draw() const
 	DrawGraph(0, 0, background_image, TRUE);
 
 	//名前入力指示文字列
-	DrawString(150, 100, "ランキングに登録します", 0xFFFFFF);
-	DrawFormatString(100, 220, GetColor(255, 255, 255), ">%s", name);
+
+
+	SetFontSize(48);
+	DrawString(140, 50, "ランキング登録", 0x000000);
+
+	SetFontSize(16);
+	//DrawString(150, 100, "ランキングに登録します", 0x000000);
+	DrawFormatString(100, 220, GetColor(0, 0, 0), ">%s", name);
 
 	//選択文字を描画
 	const int font_size = 25;
@@ -83,29 +89,29 @@ void RankingInputScene::Draw() const
 	{
 		int x = (i % 13) * font_size + 15;
 		int y = (i / 13) * font_size + 300;
-		DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'a' + i);
+		DrawFormatString(x, y, GetColor(0, 0, 0), "%-3c", 'a' + i);
 		y = ((i / 13) + 2) * font_size + 300;
-		DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'A' + i);
+		DrawFormatString(x, y, GetColor(0, 0, 0), "%-3c", 'A' + i);
 	}
-	DrawString(40, 405, "決定", GetColor(255, 255, 255));
-	DrawString(40 + font_size * 2, 405, "消す", GetColor(255, 255, 255));
+	DrawString(40, 405, "決定", GetColor(0, 0, 0));
+	DrawString(40 + font_size * 2, 405, "消す", GetColor(0, 0, 0));
 
 	//選択文字をフォーカスする
 	if (cursor_y < 4)
 	{
 		int x = cursor_x * font_size + 10;
 		int y = cursor_y * font_size + 295;
-		DrawBox(x, y, x + font_size, y + font_size, GetColor(255, 255, 255), FALSE);
+		DrawBox(x, y, x + font_size, y + font_size, GetColor(0, 0, 0), FALSE);
 	}
 	else
 	{
 		if (cursor_x == 0)
 		{
-			DrawBox(35, 400, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+			DrawBox(35, 400, 35 + font_size * 2, 400 + font_size, GetColor(0, 0, 0), FALSE);
 		}
 		else
 		{
-			DrawBox(85, 400, 85 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+			DrawBox(85, 400, 85 + font_size * 2, 400 + font_size, GetColor(0, 0, 0), FALSE);
 		}
 	}
 }
