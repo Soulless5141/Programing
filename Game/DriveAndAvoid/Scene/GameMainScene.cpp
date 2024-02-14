@@ -334,7 +334,7 @@ void GameMainScene::Finalize()
 	int score = (mileage / 10 * 10);
 	for (int i = 0; i < 3; i++)
 	{
-		score += (i + 1) * 50 * enemy_count[i];
+		score += (i + 1) * 500 * enemy_count[i];
 	}
 
 	//リザルトデータの書き込み
