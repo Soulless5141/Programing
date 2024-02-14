@@ -250,9 +250,6 @@ void GameMainScene::Draw() const
 	DrawGraph(0, mileage % 480 - 480, back_ground, TRUE);
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
 
-	////BGMÄ¶
-	//PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, TRUE);
-
 	//“G‚Ì•`‰æ
 	for (int i = 0; i < 10; i++)
 	{

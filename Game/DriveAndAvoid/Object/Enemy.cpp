@@ -29,7 +29,7 @@ void Enemy::Initialize()
 	//爆破データ読み込み
 	ex_img_check = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 100, 100, ex_img);
 	//敵の音声データ読み込み
-	ex_se_check = LoadSoundMem("Resource/se/enemy_explosion .mp3", ex_se);
+	ex_se = LoadSoundMem("Resource/se/enemy_explosion .mp3");
 
 	// 画像が入ってるか？
 	if (ex_img_check == -1)
@@ -39,7 +39,7 @@ void Enemy::Initialize()
 	// SEが入っているか？
 	if (ex_se_check == -1)
 	{
-		throw("Resource/se/enemy_explosion .mp3がありません\n");
+		throw("Resource/se/enemy_explosion.mp3がありません\n");
 	}
 }
 
@@ -53,6 +53,7 @@ void Enemy::Update(float speed)
 		//位置情報に移動量を加算する
 		location += Vector2D(0.0f, 3);
 		ex_num++;
+		
 		if (ex_num >= 16)
 		{
 			ex_flg = 2;
@@ -108,7 +109,7 @@ void Enemy::AnimEx()
 	ex_flg = 1;
 	ex_num = 0;
 	// 音声入れる
-	PlaySoundMem(ex_se, DX_PLAYTYPE_BACK, FALSE);
+	PlaySoundMem(ex_se, DX_PLAYTYPE_BACK, TRUE);
 }
 
 // 爆破フラグをゲットする
