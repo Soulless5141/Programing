@@ -61,7 +61,7 @@ void GameMainScene::Initialize()
 		throw("Resource/images/Enemy3.png‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
 
-	/*if (explosion == -1)
+	if (explosion == -1)
 	{
 		throw("Resource/images/explosion.png‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
