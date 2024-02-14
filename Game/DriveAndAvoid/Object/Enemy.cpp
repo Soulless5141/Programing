@@ -37,7 +37,7 @@ void Enemy::Initialize()
 		throw("Resource/images/explosion.pngがありません\n");
 	}
 	// SEが入っているか？
-	if (ex_se_check == -1)
+	if (ex_se == -1)
 	{
 		throw("Resource/se/enemy_explosion.mp3がありません\n");
 	}
@@ -82,7 +82,7 @@ void Enemy::Draw() const
 
 void Enemy::Finalize()
 {
-
+	DeleteSoundMem(ex_se);
 }
 
 //敵のタイプを取得
