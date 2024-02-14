@@ -12,7 +12,7 @@ private:
 	Vector2D box_size;   //“–‚½‚è”»’è‚Ì‘å‚«‚³
 
 public:
-	Enemy(int type, int handle);
+	Enemy(int type, int handle, Vector2D size);
 	~Enemy();
 
 	void Initialize();          //‰Šú‰»ˆ—

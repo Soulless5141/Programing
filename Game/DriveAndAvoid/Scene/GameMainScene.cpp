@@ -69,6 +69,10 @@ void GameMainScene::Initialize()
 	{
 		enemy[i] = nullptr;
 	}
+
+	enemy_size[0] = Vector2D(31.0f, 21.f);
+	enemy_size[1] = Vector2D(31.0f, 27.f);
+	enemy_size[2] = Vector2D(31.0f, 31.f);
 }
 
 //XVˆ—
@@ -89,7 +93,7 @@ eSceneType GameMainScene::Update()
 			if (enemy[i] == nullptr)
 			{
 				int type = /*GetRand(3)*/i % 3;
-				enemy[i] = new Enemy(type, enemy_image[type]);
+				enemy[i] = new Enemy(type, enemy_image[type], enemy_size[type]);
 				enemy[i]->Initialize();
 				break;
 			}

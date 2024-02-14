@@ -19,6 +19,7 @@ private:
 	Player* player;        //プレイヤー
 	Enemy** enemy;         //敵
 	std::vector<Item> item;//アイテム
+	Vector2D enemy_size[3];
 
 public:
 	GameMainScene();

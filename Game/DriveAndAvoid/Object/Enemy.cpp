@@ -1,8 +1,8 @@
 #include "Enemy.h"
 #include"DxLib.h"
 
-Enemy::Enemy(int type, int handle) :type(type), image(handle), speed(0.0f),
-location(0.0f), box_size(0.0f)
+Enemy::Enemy(int type, int handle, Vector2D size) :type(type), image(handle), speed(0.0f),
+location(0.0f), box_size(size)
 {
 
 }
@@ -20,7 +20,7 @@ void Enemy::Initialize()
 	//¶¬ˆÊ’u‚ÌÝ’è
 	location = Vector2D(random_x, -50.0f);
 	//“–‚½‚è”»’è‚ÌÝ’è
-	box_size = Vector2D(31.0f, 60.0f);
+	//box_size = Vector2D(31.0f, 60.0f);
 	//‘¬‚³‚ÌÝ’è
 	speed = (float)(this->type * 2);
 }
