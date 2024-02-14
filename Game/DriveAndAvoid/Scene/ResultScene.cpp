@@ -22,16 +22,27 @@ void ResultScene::Initialize()
 {
 	//画像の読み込み
 	back_ground = LoadGraph("Resource/images/back.bmp");
-	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	//int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
+	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
+	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
 
 	//エラーチェック
 	if (back_ground == -1)
 	{
 		throw("Resource/images/back.bmpがありません\n");
 	}
-	if (result == -1)
+	if (enemy_image[0] == -1)
 	{
-		throw("Resource/images/car.bmpがありません\n");
+		throw("Resource/images/Enemy1.pngがありません\n");
+	}
+	if (enemy_image[1] == -1)
+	{
+		throw("Resource/images/Enemy2.pngがありません\n");
+	}
+	if (enemy_image[2] == -1)
+	{
+		throw("Resource/images/Enemy3.pngがありません\n");
 	}
 
 	//ゲーム結果の読み込み
@@ -68,7 +79,7 @@ void ResultScene::Draw() const
 	DrawString(180, 200, "走行距離       ", GetColor(0, 0, 0));
 	for (int i = 0; i < 3; i++)
 	{
-		DrawRotaGraph(230, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[i], TRUE);
+		DrawRotaGraph(230, 230 + (i * 20), 0.4f, 0.0, enemy_image[i], TRUE);
 		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d,",
 			enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
 	}
