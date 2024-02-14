@@ -4,7 +4,10 @@
 Enemy::Enemy(int type, int handle, Vector2D size) :type(type), image(handle), speed(0.0f),
 location(0.0f), box_size(size)
 {
-
+	for (int i = 0; i < 16; i++)
+	{
+		ex_img[i] = NULL;
+	}
 }
 
 Enemy::~Enemy()
@@ -23,18 +26,43 @@ void Enemy::Initialize()
 	//box_size = Vector2D(31.0f, 60.0f);
 	//‘¬‚³‚ÌÝ’è
 	speed = (float)((this->type + 1) * 2) + 2.f;
+	//”š”jƒf[ƒ^“Ç‚Ýž‚Ý
+	LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 100, 100, ex_img);
 }
 
 void Enemy::Update(float speed)
 {
-	//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
-	location += Vector2D(0.0f, this->speed + speed - 5);
+	////ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
+	//location += Vector2D(0.0f, this->speed + speed - 5);
+
+	if (ex_flg == 1)
+	{
+		//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
+		location += Vector2D(0.0f, 3);
+		ex_num++;
+		if (ex_num >= 16)
+		{
+			ex_flg = 2;
+		}
+	}
+	else
+	{
+		//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
+		location += Vector2D(0.0f, this->speed + speed - 5);
+	}
 }
 
 void Enemy::Draw() const
 {
-	//“G‰æ‘œ‚Ì•`‰æ
-	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	if (ex_flg == 1)
+	{
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, ex_img[ex_num], TRUE); // ƒAƒjƒ[ƒVƒ‡ƒ“i‰¼j
+	}
+	else
+	{
+		//“G‰æ‘œ‚Ì•`‰æ
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	}
 }
 
 void Enemy::Finalize()
@@ -58,4 +86,17 @@ Vector2D Enemy::GetLocation() const
 Vector2D Enemy::GetBoxSize() const
 {
 	return box_size;
+}
+
+// ”š”j‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+void Enemy::AnimEx()
+{
+	ex_flg = 1;
+	ex_num = 0;
+}
+
+// ”š”jƒtƒ‰ƒO‚ðƒQƒbƒg‚·‚é
+int Enemy::GetExFlg()
+{
+	return this->ex_flg;
 }

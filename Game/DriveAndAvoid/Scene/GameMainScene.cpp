@@ -4,7 +4,7 @@
 #include<math.h>
 
 GameMainScene::GameMainScene() : high_score(0), back_ground(NULL),
-barrier_image(NULL), mileage(0), player(nullptr), enemy(nullptr)
+barrier_image(NULL), mileage(0), explosion_flg(false), player(nullptr), enemy(nullptr)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -137,7 +137,13 @@ eSceneType GameMainScene::Update()
 		{
 			enemy[i]->Update(player->GetSpeed());
 
-			
+			if (enemy[i]->GetExFlg() == 2)
+			{
+				enemy[i]->Finalize();
+				delete enemy[i];
+				enemy[i] = nullptr;
+				continue;
+			}
 
 			//âÊñ äOÇ…çsÇ¡ÇΩÇÁÅAìGÇçÌèúÇµÇƒÉXÉRÉAâ¡éZ
 			if (enemy[i]->GetLocation().y >= 640.0f)
@@ -159,13 +165,15 @@ eSceneType GameMainScene::Update()
 				if (player->GetSpNow() == 2) {
 					// îRóøÇ500âÒïú
 					player->AddFuel(500.f);
-					enemy[i]->Finalize();
-					delete enemy[i];
-					enemy[i] = nullptr;
+					enemy[i]->AnimEx();
+					//enemy[i]->Finalize();
+					//delete enemy[i];
+					//enemy[i] = nullptr;
 				}
 				else {  // îöèŒÉQÅ[ÉWégópÇµÇƒÇ¢Ç»ÇØÇÍÇŒ
 					player->SetActive(false);
 					player->DecreaseHp(-100.0f);
+					/* Ç±Ç±Ç…îöîjÇì¸ÇÍÇΩÇ¢ */
 					PlaySoundMem(PexplosionSE,DX_PLAYTYPE_BACK,TRUE);
 					enemy[i]->Finalize();
 					delete enemy[i];
@@ -240,7 +248,7 @@ void GameMainScene::Draw() const
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
 
 	//BGMçƒê∂
-	PlaySoundMem(main_bgm, DX_PLAYTYPE_BACK, FALSE);
+	PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, FALSE);
 
 	//ìGÇÃï`âÊ
 	for (int i = 0; i < 10; i++)
@@ -248,6 +256,7 @@ void GameMainScene::Draw() const
 		if (enemy[i] != nullptr)
 		{
 			enemy[i]->Draw();
+			
 		}
 	}
 
@@ -257,6 +266,8 @@ void GameMainScene::Draw() const
 
 	//ÉvÉåÉCÉÑÅ[ÇÃï`âÊ
 	player->Draw();
+
+	
 
 	//UIÇÃï`âÊ
 	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
@@ -390,6 +401,11 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 
 	//ìGèÓïÒÇ™Ç»ÇØÇÍÇŒÅAìñÇΩÇËîªíËÇñ≥éãÇ∑ÇÈ
 	if (e == nullptr)
+	{
+		return false;
+	}
+
+	if (e->GetExFlg() == 1)
 	{
 		return false;
 	}
