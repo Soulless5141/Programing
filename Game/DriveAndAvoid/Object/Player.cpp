@@ -59,8 +59,11 @@ void Player::Update()
 		return;
 	}
 
-	//燃料の消費
-	fuel -= speed;
+	// 爆笑ゲージが使用中じゃない時
+	if (spnow != 2) {
+		//燃料の消費
+		fuel -= speed;
+	}
 
 	//移動処理
 	Movement();
