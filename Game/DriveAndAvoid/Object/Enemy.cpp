@@ -29,7 +29,7 @@ void Enemy::Initialize()
 	//爆破データ読み込み
 	ex_img_check = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 100, 100, ex_img);
 	//敵の音声データ読み込み
-	ex_se = LoadSoundMem("Resource/se/enemy_explosion .mp3");
+	ex_se = LoadSoundMem("Resource/se/enemy_explosion.wav");
 
 	// 画像が入ってるか？
 	if (ex_img_check == -1)
@@ -39,7 +39,7 @@ void Enemy::Initialize()
 	// SEが入っているか？
 	if (ex_se == -1)
 	{
-		throw("Resource/se/enemy_explosion.mp3がありません\n");
+		throw("Resource/se/enemy_explosion.wavがありません\n");
 	}
 }
 

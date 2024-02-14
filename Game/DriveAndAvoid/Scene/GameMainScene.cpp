@@ -37,7 +37,7 @@ void GameMainScene::Initialize()
 	//BGM読み込み
 	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
 	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
-	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.mp3");
+	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.wav");
 
 	//エラーチェック
 	if (back_ground == -1)
