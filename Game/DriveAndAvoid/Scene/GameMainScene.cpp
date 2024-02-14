@@ -358,7 +358,7 @@ void GameMainScene::Finalize()
 	}
 
 	// 走行距離を保存
-	fprintf(fp, "%d,\n", mileage /10 *10);
+	fprintf(fp, "%d,\n", mileage / 10 * 10);
 
 	//ファイルクローズ
 	fclose(fp);

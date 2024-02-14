@@ -77,6 +77,7 @@ void ResultScene::Draw() const
 	DrawString(220, 170, "ゲームオーバー", GetColor(204, 0, 0));
 	SetFontSize(16);
 	DrawString(180, 200, "走行距離       ", GetColor(0, 0, 0));
+	DrawFormatString(250, 200, 0xFFFFFF, "             = %6d", mileage);
 	for (int i = 0; i < 3; i++)
 	{
 		DrawRotaGraph(230, 230 + (i * 20), 0.4f, 0.0, enemy_image[i], TRUE);
@@ -124,6 +125,8 @@ void ResultScene::ReadResultData()
 	{
 		fscanf_s(fp, "%6d\n", &enemy_count[i]);
 	}
+
+	fscanf_s(fp, "%6d\n", &mileage);
 
 	//ファイルクローズ
 	fclose(fp);

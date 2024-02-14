@@ -7,6 +7,7 @@ class ResultScene : public SceneBase
 private:
 	int back_ground;      //背景画像
 	int score;            //スコア
+	int mileage;		  //走行距離
 	int enemy_count[3];   //敵のカウント
 	int enemy_image[3];   //敵画像
 
