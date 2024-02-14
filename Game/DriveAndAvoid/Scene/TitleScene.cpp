@@ -23,7 +23,6 @@ void TitleScene::Initialize()
 
 	//BGM読み込み
 	title_bgm = LoadSoundMem("Resource/bgm/TitleBGM.wav");
-	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
 
 	//エラーチェック
 	if (background_image == -1)
@@ -47,6 +46,9 @@ void TitleScene::Initialize()
 //更新処理
 eSceneType TitleScene::Update()
 {
+	//BGM再生
+	PlaySoundMem(title_bgm, DX_PLAYTYPE_LOOP, FALSE);
+
 	//カーソル下移動
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
 	{
@@ -100,9 +102,9 @@ void TitleScene::Draw() const
 	//カーソル画像の描画
 	DrawRotaGraph(60, 250 + menu_cursor * 40, 0.7, DX_PI / 2.0, cursor_image, TRUE);
 
+	//タイトルの描画
 	DrawString(50, 100, "ニコちゃんは旅に出る。", 0xFF0000);
-	
-	PlaySoundMem(title_bgm, DX_PLAYTYPE_BACK, FALSE);
+
 }
 
 //終了時処理
@@ -112,6 +114,8 @@ void TitleScene::Finalize()
 	DeleteGraph(background_image);
 	DeleteGraph(menu_image);
 	DeleteGraph(cursor_image);
+
+	//BGM停止
 	StopSoundMem(title_bgm);
 }
 

@@ -9,7 +9,6 @@ private:
 	int menu_image;         //メニュー画像
 	int cursor_image;       //カーソル画像
 	int menu_cursor;        //メニューカーソル番号
-	int main_bgm;           //メインBGM
 	int title_bgm;          //タイトルBGM
 
 public:

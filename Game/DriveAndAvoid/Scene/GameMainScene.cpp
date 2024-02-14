@@ -34,6 +34,8 @@ void GameMainScene::Initialize()
 	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
 	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
+	//BGMì«Ç›çûÇ›
+	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
 	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
 	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.mp3");
 
@@ -245,6 +247,9 @@ void GameMainScene::Draw() const
 	DrawGraph(0, mileage % 480 - 480, back_ground, TRUE);
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
 
+	//BGMçƒê∂
+	PlaySoundMem(main_bgm, DX_PLAYTYPE_LOOP, FALSE);
+
 	//ìGÇÃï`âÊ
 	for (int i = 0; i < 10; i++)
 	{
@@ -318,6 +323,9 @@ void GameMainScene::Draw() const
 //èIóπéûèàóù
 void GameMainScene::Finalize()
 {
+	//BGMí‚é~
+	StopSoundMem(main_bgm);
+
 	//ÉXÉRÉAÇåvéZÇ∑ÇÈ
 	int score = (mileage / 10 * 10);
 	for (int i = 0; i < 3; i++)
