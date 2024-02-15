@@ -3,7 +3,7 @@
 #include"DxLib.h"
 
 TitleScene::TitleScene() :background_image(NULL), menu_image(NULL),
-cursor_image(NULL), menu_cursor(0)
+cursor_image(NULL), menu_cursor(0),title_bgm(NULL)
 {
 
 }
@@ -38,6 +38,11 @@ void TitleScene::Initialize()
 	if (cursor_image == -1)
 	{
 		throw("Resource/images/cone.bmp‚ª‚ ‚è‚Ü‚¹‚ñ\n");
+	}
+
+	if (title_bgm == -1)
+	{
+		throw("Resource/bgm/TitleBGM.wav‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
 
 	SetFontSize(48);

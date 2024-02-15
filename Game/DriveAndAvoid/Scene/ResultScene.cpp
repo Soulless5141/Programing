@@ -3,7 +3,7 @@
 #include"../Utility/InputControl.h"
 #include"DxLib.h"
 
-ResultScene::ResultScene() : back_ground(NULL), score(0)
+ResultScene::ResultScene() : back_ground(NULL), score(0),mileage(0)
 {
 	for (int i = 0; i < 3; i++)
 	{
