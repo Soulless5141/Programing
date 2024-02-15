@@ -22,6 +22,11 @@ void RankingInputScene::Initialize()
 	//BGMの読み込み
 	rankinginput_bgm = LoadSoundMem("Resource/bgm/RankingInputBGM.wav");
 
+	//カーソル音読み込み
+	select_se = LoadSoundMem("Resource/se/select.wav");
+	//決定音読み込み
+	decision_se = LoadSoundMem("Resource/se/decision.wav");
+
 	//エラーチェック
 	if (background_image == -1)
 	{
@@ -32,6 +37,17 @@ void RankingInputScene::Initialize()
 	{
 		throw("Resource/bgm/RankingInputBGM.wavがありません\n");
 	}
+
+	if (select_se == -1)
+	{
+		throw("Resource/bgm/select.wavがありません\n");
+	}
+
+	if (decision_se == -1)
+	{
+		throw("Resource/se/decision.wav.wavがありません\n");
+	}
+
 
 	//メモリの動的確保
 	ranking = new RankingData;
@@ -139,6 +155,10 @@ void RankingInputScene::Finalize()
 	//読み込んだBGMの削除
 	DeleteSoundMem(rankinginput_bgm);
 
+	//読み込んだSEを削除
+	DeleteSoundMem(select_se);
+	DeleteSoundMem(decision_se);
+
 	//動的メモリの解放
 	delete ranking;
 }
@@ -155,6 +175,8 @@ bool RankingInputScene::InputName()
 	//カーソル操作処理
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
+		// カーソル音鳴らす
+		PlaySoundMem(select_se, DX_PLAYTYPE_BACK, TRUE);
 		if (cursor_x > 0)
 		{
 			cursor_x--;
@@ -166,6 +188,8 @@ bool RankingInputScene::InputName()
 	}
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
+		// カーソル音鳴らす
+		PlaySoundMem(select_se, DX_PLAYTYPE_BACK, TRUE);
 		if (cursor_x < 12)
 		{
 			cursor_x++;
@@ -179,6 +203,8 @@ bool RankingInputScene::InputName()
 	{
 		if (cursor_y > 0)
 		{
+			// カーソル音鳴らす
+			PlaySoundMem(select_se, DX_PLAYTYPE_BACK, TRUE);
 			cursor_y--;
 		}
 	}
@@ -186,6 +212,8 @@ bool RankingInputScene::InputName()
 	{
 		if (cursor_y <4)
 		{
+			// カーソル音鳴らす
+			PlaySoundMem(select_se, DX_PLAYTYPE_BACK, TRUE);
 			cursor_y++;
 			if (cursor_y == 4)
 			{
@@ -197,6 +225,8 @@ bool RankingInputScene::InputName()
 	//カーソル位置の文字を決定する
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
+		// 決定音鳴らす
+		PlaySoundMem(decision_se, DX_PLAYTYPE_BACK, TRUE);
 		if (cursor_y < 2)
 		{
 			name[name_num++] = 'a' + cursor_x + (cursor_y * 13);
@@ -217,12 +247,12 @@ bool RankingInputScene::InputName()
 		}
 		else
 		{
-			if (cursor_x == 0)
+			if (cursor_x == 0) // 決定ボタン
 			{
 				name[name_num] = '\0';
 				return true;
 			}
-			else
+			else // 戻るボタン
 			{
 				if (name_num > 0)
 				{

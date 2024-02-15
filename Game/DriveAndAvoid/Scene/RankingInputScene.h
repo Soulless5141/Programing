@@ -14,6 +14,8 @@ private:
 	int cursor_x;            //カーソルx座標
 	int cursor_y;            //カーソルy座標
 	int rankinginput_bgm;    //BGM
+	int select_se;			 //十字キー押した時のSE
+	int decision_se;		 //決定音のSE
 
 public:
 	RankingInputScene();
