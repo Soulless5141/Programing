@@ -1,21 +1,23 @@
 #include "Item.h"
 #include "DxLib.h"
 
-Item::Item() {
+Item::Item() : image(NULL), speed(NULL)
+{
 
 }
 
-Item::~Item() {
+Item::~Item()
+{
 
 }
 
-void Item::Initialize() {
+void Item::Initialize()
+{
 	//出現させるX座標パターンを取得
 	float random_x = (float)(GetRand(4) * 105 + 40);
 	//生成位置の設定
 	location = Vector2D(random_x, -50.0f);
 	box_size = Vector2D(20.0f, 40.0f);
-	angle = 0.0f;
 	speed = 6.0f;
 
 	//画像の読み込み
@@ -28,17 +30,20 @@ void Item::Initialize() {
 	}
 }
 
-void Item::Update(float speed) {
+void Item::Update(float speed)
+{
 	//位置情報に移動量を加算する
 	location += Vector2D(0.0f, this->speed + speed - 6);
 }
 
-void Item::Draw() const {
+void Item::Draw() const
+{
 	//アイテム画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
 }
 
-void Item::Finalize() {
+void Item::Finalize()
+{
 
 }
 
