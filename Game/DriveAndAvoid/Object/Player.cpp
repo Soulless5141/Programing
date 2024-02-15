@@ -85,10 +85,10 @@ void Player::Update()
 	//‰ÁŒ¸‘¬ˆ—
 	Acceleration();
 
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
+	/*if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
 	{
 		is_active = false;
-	}
+	}*/
 
 	//ƒoƒŠƒAˆ—
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
