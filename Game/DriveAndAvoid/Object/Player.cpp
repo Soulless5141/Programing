@@ -74,7 +74,11 @@ void Player::Update()
 	}
 
 	// 爆笑ゲージが使用中じゃない時
-	if (niconow != 2) {
+	if (niconow == 2) {
+		//燃料の消費
+		fuel -= speed / 2.f;
+	}
+	else {
 		//燃料の消費
 		fuel -= speed;
 	}
