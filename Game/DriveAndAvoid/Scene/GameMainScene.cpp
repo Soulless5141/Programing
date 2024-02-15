@@ -34,9 +34,9 @@ void GameMainScene::Initialize()
 	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
 	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
+	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
 	//BGMì«Ç›çûÇ›
 	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
-	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
 	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.wav");
 	kanSE = LoadSoundMem("Resource/se/kan.wav");
 
@@ -70,7 +70,7 @@ void GameMainScene::Initialize()
 
 	if (barrier_image == -1)
 	{
-		throw("Resource/images/car.bmpÇ™Ç†ÇËÇ‹ÇπÇÒ\n");
+		throw("Resource/images/barrier.bmpÇ™Ç†ÇËÇ‹ÇπÇÒ\n");
 	}
 	if (kanSE == -1)
 	{
