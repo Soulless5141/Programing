@@ -300,7 +300,7 @@ void GameMainScene::Draw() const
 	SetFontSize(16);
 	DrawFormatString(510, 20, GetColor(0, 0, 0), "ハイスコア");
 	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
-	DrawFormatString(510, 80, GetColor(0, 0, 0), "避けた数");
+	DrawFormatString(510, 80, GetColor(0, 0, 0), "避けた+倒した数");
 	for (int i = 0; i < 3; i++)
 	{
 		DrawRotaGraph(523 + (i * 50), 120, 0.8, 0, enemy_image[i], TRUE, FALSE);
