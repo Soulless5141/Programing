@@ -175,21 +175,24 @@ bool RankingInputScene::InputName()
 			cursor_x = 0;
 		}
 	}
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP))
-	{
-		if (cursor_y > 0)
+	// “ü—Í•¶š”‚ª14•¶š–¢–‚¾‚Á‚½‚ç
+	if (name_num < 14) {
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP))
 		{
-			cursor_y--;
-		}
-	}
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
-	{
-		if (cursor_y <4)
-		{
-			cursor_y++;
-			if (cursor_y == 4)
+			if (cursor_y > 0)
 			{
-				cursor_x = 0;
+				cursor_y--;
+			}
+		}
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
+		{
+			if (cursor_y < 4)
+			{
+				cursor_y++;
+				if (cursor_y == 4)
+				{
+					cursor_x = 0;
+				}
 			}
 		}
 	}
