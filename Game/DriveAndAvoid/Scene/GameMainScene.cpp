@@ -191,7 +191,7 @@ eSceneType GameMainScene::Update()
 					// ƒvƒŒƒCƒ„[‚ÌHPŒ¸­
 					if (enemy[i]->GetType() == 0)
 					{
-						player->DecreaseHp(-300.0f);
+						player->DecreaseHp(-100.0f);
 					}
 					else if (enemy[i]->GetType() == 1)
 					{
@@ -199,7 +199,7 @@ eSceneType GameMainScene::Update()
 					}
 					else
 					{
-						player->DecreaseHp(-100.0f);
+						player->DecreaseHp(-300.0f);
 					}
 					/* ‚±‚±‚É”š”j‚ð“ü‚ê‚½‚¢ */
 					PlaySoundMem(PexplosionSE,DX_PLAYTYPE_BACK,TRUE);
