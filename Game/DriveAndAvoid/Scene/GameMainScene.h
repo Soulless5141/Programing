@@ -19,6 +19,7 @@ private:
 	int explosion_image[58];//爆破画像 
 	int explosion_flg;		// 爆破フラグ
 	int PexplosionSE;     //プレイヤーの爆破SE
+	int kanSE;			  //ガソリン缶のSE
 	Player* player;        //プレイヤー
 	Enemy** enemy;         //敵
 	std::vector<Item> item;//アイテム

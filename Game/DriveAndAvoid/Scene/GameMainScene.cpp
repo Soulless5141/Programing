@@ -38,6 +38,8 @@ void GameMainScene::Initialize()
 	main_bgm = LoadSoundMem("Resource/bgm/MainBGM.wav");
 	int explosion = LoadDivGraph("Resource/images/explosion.png", 16, 8, 2, 32, 32, explosion_image);
 	PexplosionSE = LoadSoundMem("Resource/se/player_explosion.wav");
+	kanSE = LoadSoundMem("Resource/se/kan.wav");
+
 
 	//エラーチェック
 	if (back_ground == -1)
@@ -69,6 +71,10 @@ void GameMainScene::Initialize()
 	if (barrier_image == -1)
 	{
 		throw("Resource/images/car.bmpがありません\n");
+	}
+	if (kanSE == -1)
+	{
+		throw("Resource/se/kan.wavがありません\n");
 	}
 
 	//BGM再生
@@ -207,6 +213,7 @@ eSceneType GameMainScene::Update()
 		}
 		// 当たり判定の確認
 		if (IsHitCheck(player, item[i])) {
+			PlaySoundMem(kanSE, DX_PLAYTYPE_BACK, TRUE);
 			// 燃料を1000回復
 			player->AddFuel(1000.f);
 			item[i].Finalize();
@@ -331,6 +338,8 @@ void GameMainScene::Finalize()
 {
 	//BGM停止
 	StopSoundMem(main_bgm);
+	//メモリ解放のためSEデータ削除
+	DeleteSoundMem(kanSE);
 
 	//スコアを計算する
 	int score = (mileage / 10 * 10);
