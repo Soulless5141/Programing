@@ -18,16 +18,27 @@ void HelpScene::Initialize()
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Title.png");
 
+	//BGMの読み込み
+	help_bgm = LoadSoundMem("Resource/bgm/HelpBGM.wav");
+
 	//エラーチェック
 	if (background_image == -1)
 	{
 		throw("Resource/images/Title.pngがありません\n");
+	}
+
+	if (help_bgm == -1)
+	{
+		throw("Resource/bgm/HelpBGM.wavがありません\n");
 	}
 }
 
 //更新処理
 eSceneType HelpScene::Update()
 {
+	//BGM再生
+	PlaySoundMem(help_bgm, DX_PLAYTYPE_LOOP, FALSE);
+
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_A) && operation_flg == false)
 	{
 		operation_flg = true;
@@ -96,6 +107,9 @@ void HelpScene::Finalize()
 {
 	//読み込んだ画像の削除
 	DeleteGraph(background_image);
+
+	//読み込んだBGMの削除
+	DeleteSoundMem(help_bgm);
 }
 
 //現在のシーン情報を取得

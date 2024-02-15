@@ -19,10 +19,18 @@ void RankingInputScene::Initialize()
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Ranking.png");
 
+	//BGMの読み込み
+	rankinginput_bgm = LoadSoundMem("Resource/bgm/RankingInputBGM.wav");
+
 	//エラーチェック
 	if (background_image == -1)
 	{
 		throw("Resource/images/Ranking.pngがありません\n");
+	}
+
+	if (rankinginput_bgm == -1)
+	{
+		throw("Resource/bgm/RankingInputBGM.wavがありません\n");
 	}
 
 	//メモリの動的確保
@@ -51,6 +59,9 @@ void RankingInputScene::Initialize()
 eSceneType RankingInputScene::Update()
 {
 	bool is_change = false;
+
+	//BGM再生
+	PlaySoundMem(rankinginput_bgm, DX_PLAYTYPE_LOOP, FALSE);
 
 	//名前入力処理
 	is_change = InputName();
@@ -124,6 +135,9 @@ void RankingInputScene::Finalize()
 
 	//読み込んだ画像を削除
 	DeleteGraph(background_image);
+
+	//読み込んだBGMの削除
+	DeleteSoundMem(rankinginput_bgm);
 
 	//動的メモリの解放
 	delete ranking;
