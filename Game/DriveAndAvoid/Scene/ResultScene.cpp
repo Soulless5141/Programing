@@ -22,7 +22,6 @@ void ResultScene::Initialize()
 {
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
 	back_ground = LoadGraph("Resource/images/back.bmp");
-	//int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 	enemy_image[0] = LoadGraph("Resource/images/Enemy1.png");
 	enemy_image[1] = LoadGraph("Resource/images/Enemy2.png");
 	enemy_image[2] = LoadGraph("Resource/images/Enemy3.png");
