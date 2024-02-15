@@ -28,7 +28,7 @@ void Player::Initialize()
 	angle = 0.0f;
 	speed = 5.0f;
 	hp = 1000;
-	nico = 1000;
+	nico = 0;
 	niconow = 0;
 	nicomax = false;
 	fuel = MAX_FUEL;
