@@ -188,7 +188,19 @@ eSceneType GameMainScene::Update()
 				}
 				else {  // 爆笑ゲージ使用していなければ
 					player->SetActive(false);
-					player->DecreaseHp(-100.0f);
+					// プレイヤーのHP減少
+					if (enemy[i]->GetType() == 0)
+					{
+						player->DecreaseHp(-300.0f);
+					}
+					else if (enemy[i]->GetType() == 1)
+					{
+						player->DecreaseHp(-200.0f);
+					}
+					else
+					{
+						player->DecreaseHp(-100.0f);
+					}
 					/* ここに爆破を入れたい */
 					PlaySoundMem(PexplosionSE,DX_PLAYTYPE_BACK,TRUE);
 					enemy[i]->Finalize();
