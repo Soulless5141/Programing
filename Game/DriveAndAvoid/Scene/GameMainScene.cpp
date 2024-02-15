@@ -3,8 +3,9 @@
 #include"DxLib.h"
 #include<math.h>
 
-GameMainScene::GameMainScene() : high_score(0), back_ground(NULL),
-barrier_image(NULL), mileage(0), explosion_flg(false), player(nullptr), enemy(nullptr)
+GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), PexplosionSE(NULL), kanSE(NULL),
+barrier_image(NULL), mileage(0), explosion_flg(false), player(nullptr), enemy(nullptr),
+main_bgm(NULL), yButtonAddAlpha(0), yButtonAlpha(0)
 {
 	for (int i = 0; i < 3; i++)
 	{

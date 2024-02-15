@@ -2,7 +2,7 @@
 #include"DxLib.h"
 
 Enemy::Enemy(int type, int handle, Vector2D size) :type(type), image(handle), speed(0.0f),
-location(0.0f), box_size(size)
+location(0.0f), box_size(size),ex_flg(0), ex_img_check(NULL),ex_num(0),ex_se(0)
 {
 	for (int i = 0; i < 16; i++)
 	{
