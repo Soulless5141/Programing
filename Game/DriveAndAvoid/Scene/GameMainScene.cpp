@@ -129,7 +129,7 @@ eSceneType GameMainScene::Update()
 	//ƒAƒCƒeƒ€‚Ì¶¬ˆ—
 	if (mileage / 10 % 500 == 0)
 	{
-		int index = item.size();
+		size_t index = item.size();
 		item.emplace_back();
 		item[index].Initialize();
 	}
