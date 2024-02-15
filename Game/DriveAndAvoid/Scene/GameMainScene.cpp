@@ -172,6 +172,8 @@ eSceneType GameMainScene::Update()
 				if (player->GetSpNow() == 2) {
 					// ”R—¿‚ð500‰ñ•œ
 					player->AddFuel(500.f);
+					// “G‚ð“|‚µ‚½‚çA“|‚µ‚½ƒ^ƒCƒv‚ð‚P‰ÁŽZ
+					enemy_count[enemy[i]->GetType()]++;
 					enemy[i]->AnimEx();
 					//enemy[i]->Finalize();
 					//delete enemy[i];
