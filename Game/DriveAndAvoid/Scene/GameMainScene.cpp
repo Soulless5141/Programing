@@ -343,7 +343,6 @@ void GameMainScene::Draw() const
 		DrawFormatStringF(fx + 20.0f, fy + 22.0f, GetColor(255, 0, 0), "Y‚ð‰Ÿ‚¹I"); // Y‚ð‰Ÿ‚·‚æ‚¤‚É—U“±‚³‚¹‚é
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
-	DrawFormatString(510, 300, 0xffffff, "ç]‚µ‚½F%f", player->GetNico());
 }
 
 //I—¹Žžˆ—
