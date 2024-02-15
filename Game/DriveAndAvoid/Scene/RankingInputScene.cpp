@@ -3,7 +3,8 @@
 #include"DxLib.h"
 
 RankingInputScene::RankingInputScene() : background_image(NULL),
-ranking(nullptr), score(0), name_num(0), cursor_x(0), cursor_y(0)
+ranking(nullptr), score(0), name_num(0), cursor_x(0), cursor_y(0),
+rankinginput_bgm(NULL), select_se(NULL), decision_se(NULL)
 {
 	memset(name, NULL, (sizeof(char) * 15));
 }
