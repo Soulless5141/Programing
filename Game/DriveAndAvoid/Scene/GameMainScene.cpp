@@ -128,9 +128,9 @@ eSceneType GameMainScene::Update()
 	}
 
 	//nico上限設定
-	if (player->GetSp() >= 1000 && player->GetSpNow() == 0)
+	if (player->GetNico() >= 1000 && player->GetNicoNow() == 0)
 	{
-		player->DecreaseSpNow(1);
+		player->DecreaseNicoNow(1);
 	}
 
 	//敵の更新と当たり判定チェック
@@ -156,9 +156,9 @@ eSceneType GameMainScene::Update()
 			if (enemy[i]->GetLocation().y >= 640.0f)
 			{
 				enemy_count[enemy[i]->GetType()]++;
-				if (player->GetSpNow() == 0)     //上限1000のnico加算処理
+				if (player->GetNicoNow() == 0)     //上限1000のnico加算処理
 				{
-					player->DecreaseSp((enemy[i]->GetType() + 1 )* 100.0f); // 画面外に行った車の種類によって、ポイントが変わる。
+					player->DecreaseNico((enemy[i]->GetType() + 1 )* 100.0f); // 画面外に行った車の種類によって、ポイントが変わる。
 				}
 				enemy[i]->Finalize();
 				delete enemy[i];
@@ -169,7 +169,7 @@ eSceneType GameMainScene::Update()
 			if (IsHitCheck(player, enemy[i]))
 			{
 				// 爆笑ゲージ使用中かどうか？
-				if (player->GetSpNow() == 2) {
+				if (player->GetNicoNow() == 2) {
 					// 燃料を500回復
 					player->AddFuel(500.f);
 					enemy[i]->AnimEx();
@@ -214,12 +214,12 @@ eSceneType GameMainScene::Update()
 	}
 
 	//nicoゲージがたまると減り続ける
-	if (player->GetSpNow() == 2)
+	if (player->GetNicoNow() == 2)
 	{
-		player->DecreaseSp(-2.0f);
-		if (player->GetSp() <= 0)
+		player->DecreaseNico(-2.0f);
+		if (player->GetNico() <= 0)
 		{
-			player->DecreaseSpNow(-2);
+			player->DecreaseNicoNow(-2);
 		}
 	}
 
@@ -229,7 +229,7 @@ eSceneType GameMainScene::Update()
 		return eSceneType::E_RESULT;
 	}
 
-	if (player->GetSpMax() == true)
+	if (player->GetNicoMax() == true)
 	{
 		yButtonAlpha += yButtonAddAlpha;
 		if (yButtonAlpha <= 0)
@@ -313,15 +313,15 @@ void GameMainScene::Draw() const
 	fx = 510.0f;
 	fy = 350.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "nico GAGE");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetSp() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetNico() * 100 / 1000), fy + 40.0f, GetColor(0, 255, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
-	if (player->GetSpMax() == true) 
+	if (player->GetNicoMax() == true) 
 	{
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, yButtonAlpha);
 		DrawFormatStringF(fx + 20.0f, fy + 22.0f, GetColor(255, 0, 0), "Yを押せ！"); // Yを押すように誘導させる
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
-	DrawFormatString(510, 300, 0xffffff, "躱した：%f", player->GetSp());
+	DrawFormatString(510, 300, 0xffffff, "躱した：%f", player->GetNico());
 }
 
 //終了時処理

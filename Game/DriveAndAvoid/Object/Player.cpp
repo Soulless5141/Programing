@@ -35,7 +35,8 @@ void Player::Initialize()
 	barrier_count = 3;
 
 	//画像の読み込み
-	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120,image);
+	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, image);
+	image[3] = LoadGraph("Resource/images/car1pol.bmp");
 
 	//nicoゲージMax時の音声の読み込み
 	nico_se = LoadSoundMem("Resource/se/nico.wav");
@@ -44,6 +45,11 @@ void Player::Initialize()
 	if (result == -1)
 	{
 		throw("Resource/images/car.bmpがありません\n");
+	}
+
+	if (image[3] == -1)
+	{
+		throw("Resource/images/car1pol.bmpがありません\n");
 	}
 
 	if (nico_se == -1)
@@ -106,11 +112,11 @@ void Player::Update()
 	}
 
 	//nicoゲージがたまっているとき、Yを押すと発動
-	if (GetSpNow() == 1)
+	if (GetNicoNow() == 1)
 	{
 		if (InputControl::GetButtonDown(XINPUT_BUTTON_Y))
 		{
-			DecreaseSpNow(1);
+			DecreaseNicoNow(1);
 		}
 	}
 }
@@ -125,14 +131,24 @@ void Player::Draw()
 	}
 
 	//プレイヤー画像の描画
-	if (hp <= 200.0f) {
-		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
+	if (niconow == 2)
+	{
+		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[3], TRUE);
 	}
-	else if (hp <= 500.0f) {
-		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
-	}
-	else {
-		DrawRotaGraphF(location.x, location.y, 1.0, angle, image[1], TRUE);
+	else
+	{
+		if (hp <= 200.0f)
+		{
+			DrawRotaGraphF(location.x, location.y, 1.0, angle, image[2], TRUE);
+		}
+		else if (hp <= 500.0f)
+		{
+			DrawRotaGraphF(location.x, location.y, 1.0, angle, image[0], TRUE);
+		}
+		else
+		{
+			DrawRotaGraphF(location.x, location.y, 1.0, angle, image[1], TRUE);
+		}
 	}
 }
 
@@ -143,6 +159,7 @@ void Player::Finalize()
 	DeleteGraph(image[0]);
 	DeleteGraph(image[1]);
 	DeleteGraph(image[2]);
+	DeleteGraph(image[3]);
 
 	//バリアが生成されていたら、削除する
 	if (barrier != nullptr)
@@ -164,7 +181,7 @@ void Player::DecreaseHp(float value)
 }
 
 //nico増減処理
-void Player::DecreaseSp(float value)
+void Player::DecreaseNico(float value)
 {
 	this->nico += value;
 	// nicoゲージが1000以上の時
@@ -180,7 +197,7 @@ void Player::DecreaseSp(float value)
 }
 
 //nico中かどうかの確認(0:増加中  1:待機中   2:減少中)
-void Player::DecreaseSpNow(float value)
+void Player::DecreaseNicoNow(float value)
 {
 	this->niconow += value;
 }
@@ -217,19 +234,19 @@ float Player::GetHp() const
 }
 
 //nico取得処理
-float Player::GetSp() const
+float Player::GetNico() const
 {
 	return this->nico;
 }
 
 //nico取得処理
-float Player::GetSpNow() const
+float Player::GetNicoNow() const
 {
 	return this->niconow;
 }
 
 //nicoは満タンか？を取得
-bool Player::GetSpMax() const
+bool Player::GetNicoMax() const
 {
 	if (nico == 1000)
 	{
